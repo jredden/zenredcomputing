@@ -1,4 +1,7 @@
-zenredcomputing
-===============
+johnrredden
+===========
 
-technological site 
+A website with a collection of oddities and items belonging to JohnRedden
+
+
+

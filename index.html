@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="keywords" content=" 
+ScienceFictionSoftware, 
+",
+"Zenred Computing" />
+
+<link href="css/main.css" rel="stylesheet" type="text/css">
+
+<script src="../js/jquery-1.8.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" >
+$(document).ready(function() {
+	console.log("in ready");
+	$(resumeSect).hide();
+	$(login_op).hide();
+	$(openSourceSect).hide();
+	$(center).hide();
+	$(center2).hide();
+	$(centerZR).hide();
+	
+	$(center).fadeIn();
+	$(center).fadeOut(5000);
+	$(center2).fadeIn();
+	$(center2).fadeOut(7000);
+	$(centerZR).fadeIn();
+	$(centerZR).fadeOut(9000);
+	
+	$("#home").click(function () { 
+		console.log("in home");
+		$(resumeSect).hide();
+		$(login_op).hide();
+		$(openSourceSect).hide();
+	});	
+	$("#resume").click(function () { 
+		console.log("in resume");
+		$(resumeSect).show();
+		$(login_op).hide();
+		$(openSourceSect).hide();
+	});
+	$("#login").click(function () { 
+		console.log("in login");
+		$(login_op).show();
+		$(resumeSect).hide();
+		$(openSourceSect).hide();
+	});	
+	$("#openSource").click(function () {
+		console.log("in openSource"); 
+		$(login_op).hide();
+		$(resumeSect).hide();
+		$(openSourceSect).show();
+	});
+});
+
+
+</script>
+
+<title>Zenred Computings Web Site</title>
+</head>
+<body>
+<div id="wrapper">
+<header id="topHeader">
+<hgroup>
+<nav id="topNav">
+  <button id="home">Home</button>
+  <button id="resume">Curriculum Vitae</button>
+  <button id="login"> Login for access to Blog</button>
+  <button id="openSource">URLs to zenred computing open source on github</button>
+</nav>
+
+
+</hgroup>
+</header>
+
+<section id="space">
+</section>
+
+<section id="resumeSect">
+		<a href="docs/cvh.pdf">Curriculum Vitae</a>
+</section>
+
+<section id="openSourceSect">
+		<a href="https://github.com/jredden">Open Source On GitHub</a>
+</section>
+
+
+
+<section id="login_op">
+	<i>coming soon ...</i>
+</section>
+
+<section id="page">
+	<div id="center">
+		REDDEN
+	</div>	
+	<div id="center2">
+		ZENK
+	</div>	
+	<div id="centerZR">
+		ZENRED COMPUTING
+	</div>
+</section>
+</div>
+
+
+</body>
+</html>
