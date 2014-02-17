@@ -2,7 +2,7 @@ package com.zenred.zenredcomputing.domain;
 
 public class User {
 	
-	private Integer user_id;
+	private Integer User_id;
 	private UserStatus user_Status;
 	private String firstName;
 	private String lastName;
@@ -10,10 +10,10 @@ public class User {
 	private String password;
 	
 	public Integer getUser_id() {
-		return user_id;
+		return User_id;
 	}
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public void setUser_id(Integer User_id) {
+		this.User_id = User_id;
 	}
 	public UserStatus getUser_Status() {
 		return user_Status;
@@ -48,7 +48,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [user_id=" + user_id + ", user_Status=" + user_Status
+		return "User [User_id=" + User_id + ", user_Status=" + user_Status
 				+ ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", emailAddress=" + emailAddress + ", password=" + password
 				+ "]";
