@@ -1,0 +1,33 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+         http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+         http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+         http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           "
+	default-dependency-check="none">
+
+
+	<bean id="login" class="com.zenred.zenredcomputing.controller.Login"/>
+	<bean id="firstAccess" class="com.zenred.zenredcomputing.controller.FirstAccess"/>
+	<bean id="answerQuestion1" class="com.zenred.zenredcomputing.controller.AnswerQuestion1"/>
+	<bean id="createLogin" class="com.zenred.zenredcomputing.controller.CreateLogin"/>
+	
+	<bean id="urlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/login.html">login</prop>
+				<prop key="/firstAccess.html">firstAccess</prop>
+				<prop key="/answerQuestion1.html">answerQuestion1</prop>
+				<prop key="/createLogin.html">createLogin</prop>
+			</props>
+		</property>
+	</bean>
+</beans>
+

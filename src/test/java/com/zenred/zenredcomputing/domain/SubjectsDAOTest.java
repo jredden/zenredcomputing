@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.zenred.zenredcomputing.domain.SubjectsDAO.AlreadyAssociated;
+import com.zenred.zenredcomputing.domain.SubjectsDAO.NotAssociated;
+
 public class SubjectsDAOTest {
 
 	@Test
@@ -16,4 +19,25 @@ public class SubjectsDAOTest {
 		assertTrue(!subjects.isEmpty());
 	}
 
+	@Test
+	public void testAssociateToSubject(){
+		SubjectsDAO subjectsDAO = new SubjectsDAO();
+		Boolean status = false;
+		try {
+			subjectsDAO.associateUserToSubject("Business Stories", "johnredden@aol.com");
+		} catch (AlreadyAssociated ae) {
+			ae.printStackTrace();
+		}
+		status = true;  // made it out of dodge alive
+		assertTrue(status);
+		status = false;
+		try {
+			subjectsDAO.disasssociateUserFromSubject("Business Stories", "johnredden@aol.com");
+		} catch (NotAssociated na) {
+			na.printStackTrace();
+		}
+		status = true;  // made it out of dodge alive again
+		assertTrue(status);
+
+	}
 }

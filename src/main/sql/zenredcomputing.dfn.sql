@@ -53,7 +53,7 @@ DROP TABLE IF EXISTS `UserToPosts`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `UserToPosts` (
 `UserToPosts_id` int unsigned NOT NULL auto_increment
-,`Subjects_id` int unsigned NOT NULL
+,`User_id` int unsigned NOT NULL
 ,`Posts_id` int unsigned NOT NULL
 ,`Datestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ,KEY `UsersToPosts_idKey` (`UserToPosts_id`)
