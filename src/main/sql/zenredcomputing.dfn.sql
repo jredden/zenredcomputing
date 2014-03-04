@@ -30,6 +30,7 @@ DROP TABLE IF EXISTS `Posts`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Posts` (
 `Posts_id` int unsigned NOT NULL auto_increment
+,`Title` varchar(255) NOT NULL default ''
 ,`Content` text
 ,`Datestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ,KEY `Posts_idKey` (`Posts_id`)
