@@ -12,7 +12,7 @@ public class PostsDAO extends AbstractJDBCDao {
 	private static String joinTableName2 = "SubjectsToPosts";
 
 	private String userIndexSql = "SELECT User_id FROM User WHERE emailAddress = ?";
-	private String subjectIndexSql = "SELECT Subject_id FROM Subject WHERE Subjects_name = ?";
+	private String subjectIndexSql = "SELECT Subjects_id FROM Subjects WHERE Subjects_name = ?";
 	private String subjectToUsersIndexSql = "SELECT count(*) FROM UserToSubjects WHERE User_id = ? AND Subjects_id = ?";
 	private String lastInsertSql = "SELECT LAST_INSERT_ID()";
 
@@ -57,7 +57,7 @@ public class PostsDAO extends AbstractJDBCDao {
 		map.put("Content", post);
 		map.put("Title", title);
 		super.jdbcInsertSetup().withTableName(tableName)
-				.usingColumns("Content").execute(map);
+				.usingColumns("Content","Title").execute(map);
 		Integer posts_id = super.jdbcSetUp().getSimpleJdbcTemplate()
 				.queryForInt(lastInsertSql);
 
@@ -65,13 +65,13 @@ public class PostsDAO extends AbstractJDBCDao {
 		map.put("User_id", userId);
 		map.put("Posts_id", posts_id);
 		super.jdbcInsertSetup().withTableName(joinTableName)
-				.usingColumns("User_id", "Posts_id");
+				.usingColumns("User_id", "Posts_id").execute(map);
 
 		map = new HashMap<String, Object>();
 		map.put("Subjects_id", userId);
 		map.put("Posts_id", posts_id);
 		super.jdbcInsertSetup().withTableName(joinTableName2)
-				.usingColumns("subjectId", "Posts_id");
+				.usingColumns("Subjects_Id", "Posts_id").execute(map);
 
 	}
 
