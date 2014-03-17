@@ -10,11 +10,27 @@ public class PostsDAO extends AbstractJDBCDao {
 	private static String tableName = "Posts";
 	private static String joinTableName = "UserToPosts";
 	private static String joinTableName2 = "SubjectsToPosts";
+	private static String joinTableName3 = "UserToSubjects";
+	private static String userTableName = "User";
+	
 
 	private String userIndexSql = "SELECT User_id FROM User WHERE emailAddress = ?";
 	private String subjectIndexSql = "SELECT Subjects_id FROM Subjects WHERE Subjects_name = ?";
 	private String subjectToUsersIndexSql = "SELECT count(*) FROM UserToSubjects WHERE User_id = ? AND Subjects_id = ?";
-	private String lastInsertSql = "SELECT LAST_INSERT_ID()";
+	private String lastInsertSql = "SELECT MAX(Posts_id) FROM Posts";
+	private String userPostsWithinSubject = "SELECT po.Title, po.Content FROM "
+			+ tableName + " po JOIN " + joinTableName
+			+ " utp ON po.Posts_id = utp.Posts_id JOIN " + joinTableName2
+			+ " stp ON po.Posts_id = stp.Posts_id JOIN " + joinTableName3
+			+ " uts ON stp.Subjects_id = uts.Subjects_id JOIN " + userTableName
+			+ " us ON uts.User_id = us.User_id WHERE us.User_id = ?";
+
+	private String nonuserPostsWithinSubject = "SELECT po.Title, po.Content FROM "
+			+ tableName + " po JOIN " + joinTableName
+			+ " utp ON po.Posts_id = utp.Posts_id JOIN " + joinTableName2
+			+ " stp ON po.Posts_id = stp.Posts_id JOIN " + joinTableName3
+			+ " uts ON stp.Subjects_id = uts.Subjects_id JOIN " + userTableName
+			+ " us ON uts.User_id = us.User_id WHERE us.User_id != ?";
 
 	public class NoSubjectChoosen extends Exception {
 
@@ -68,7 +84,7 @@ public class PostsDAO extends AbstractJDBCDao {
 				.usingColumns("User_id", "Posts_id").execute(map);
 
 		map = new HashMap<String, Object>();
-		map.put("Subjects_id", userId);
+		map.put("Subjects_id", subjectId);
 		map.put("Posts_id", posts_id);
 		super.jdbcInsertSetup().withTableName(joinTableName2)
 				.usingColumns("Subjects_Id", "Posts_id").execute(map);
@@ -76,6 +92,7 @@ public class PostsDAO extends AbstractJDBCDao {
 	}
 
 	/**
+	 * used mostly for testing purposes.
 	 * 
 	 * @param post
 	 * @param usersEMail
@@ -114,8 +131,10 @@ public class PostsDAO extends AbstractJDBCDao {
 		String sql2 = "DELETE FROM " + joinTableName2
 				+ " WHERE Posts_id = ? AND Subjects_id = ?";
 		super.jdbcSetUp().getSimpleJdbcTemplate()
-				.update(sql, postsId, subjectId);
+				.update(sql2, postsId, subjectId);
 
+		String sql3 = "DELETE FROM " + tableName + " WHERE Posts_id = ?";
+		super.jdbcSetUp().getSimpleJdbcTemplate().update(sql3, postsId);
 	}
 
 }
