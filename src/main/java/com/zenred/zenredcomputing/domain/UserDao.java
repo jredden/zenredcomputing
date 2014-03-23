@@ -54,6 +54,8 @@ public class UserDao  extends AbstractJDBCDao {
 			return rs.getString("password");
 		}
 	}
+	
+	private static String userIndexSql = "SELECT User_id FROM User WHERE emailAddress = ?";
 
 	public User readUser(String firstName, String lastName, String password) {
 		User user = new User();
@@ -130,5 +132,17 @@ public class UserDao  extends AbstractJDBCDao {
 		String sql = "DELETE FROM User  WHERE password = ?";
 		super.jdbcSetUp().getSimpleJdbcTemplate()
 				.update(sql, new Object[] { password });
+	}
+	
+	/**
+	 * For internal package use
+	 * 
+	 * @param usersEmail
+	 * @return
+	 */
+	protected Integer readUserId(String usersEmail){
+		Integer userId = super.jdbcSetUp().getSimpleJdbcTemplate()
+				.queryForInt(userIndexSql, usersEmail);
+		return userId;
 	}
 }

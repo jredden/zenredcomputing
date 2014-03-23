@@ -1,6 +1,8 @@
 package com.zenred.zenredcomputing.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -12,24 +14,33 @@ public class PostsDAO extends AbstractJDBCDao {
 	private static String joinTableName2 = "SubjectsToPosts";
 	private static String joinTableName3 = "UserToSubjects";
 	private static String userTableName = "User";
-	
 
 	private String userIndexSql = "SELECT User_id FROM User WHERE emailAddress = ?";
 	private String subjectIndexSql = "SELECT Subjects_id FROM Subjects WHERE Subjects_name = ?";
 	private String subjectToUsersIndexSql = "SELECT count(*) FROM UserToSubjects WHERE User_id = ? AND Subjects_id = ?";
 	private String lastInsertSql = "SELECT MAX(Posts_id) FROM Posts";
-	private String userPostsWithinSubject = "SELECT po.Title, po.Content FROM "
-			+ tableName + " po JOIN " + joinTableName
-			+ " utp ON po.Posts_id = utp.Posts_id JOIN " + joinTableName2
-			+ " stp ON po.Posts_id = stp.Posts_id JOIN " + joinTableName3
-			+ " uts ON stp.Subjects_id = uts.Subjects_id JOIN " + userTableName
+	private String userPostsWithinSubjectSql = "SELECT po.Title, po.Content FROM "
+			+ tableName
+			+ " po JOIN "
+			+ joinTableName
+			+ " utp ON po.Posts_id = utp.Posts_id JOIN "
+			+ joinTableName2
+			+ " stp ON po.Posts_id = stp.Posts_id JOIN "
+			+ joinTableName3
+			+ " uts ON stp.Subjects_id = uts.Subjects_id JOIN "
+			+ userTableName
 			+ " us ON uts.User_id = us.User_id WHERE us.User_id = ?";
 
-	private String nonuserPostsWithinSubject = "SELECT po.Title, po.Content FROM "
-			+ tableName + " po JOIN " + joinTableName
-			+ " utp ON po.Posts_id = utp.Posts_id JOIN " + joinTableName2
-			+ " stp ON po.Posts_id = stp.Posts_id JOIN " + joinTableName3
-			+ " uts ON stp.Subjects_id = uts.Subjects_id JOIN " + userTableName
+	private String nonUserPostsWithinSubjectSql = "SELECT po.Title, po.Content FROM "
+			+ tableName
+			+ " po JOIN "
+			+ joinTableName
+			+ " utp ON po.Posts_id = utp.Posts_id JOIN "
+			+ joinTableName2
+			+ " stp ON po.Posts_id = stp.Posts_id JOIN "
+			+ joinTableName3
+			+ " uts ON stp.Subjects_id = uts.Subjects_id JOIN "
+			+ userTableName
 			+ " us ON uts.User_id = us.User_id WHERE us.User_id != ?";
 
 	public class NoSubjectChoosen extends Exception {
@@ -73,7 +84,7 @@ public class PostsDAO extends AbstractJDBCDao {
 		map.put("Content", post);
 		map.put("Title", title);
 		super.jdbcInsertSetup().withTableName(tableName)
-				.usingColumns("Content","Title").execute(map);
+				.usingColumns("Content", "Title").execute(map);
 		Integer posts_id = super.jdbcSetUp().getSimpleJdbcTemplate()
 				.queryForInt(lastInsertSql);
 
@@ -137,4 +148,49 @@ public class PostsDAO extends AbstractJDBCDao {
 		super.jdbcSetUp().getSimpleJdbcTemplate().update(sql3, postsId);
 	}
 
+	/**
+	 * read those posts posted by the user within a subject
+	 * 
+	 * @param userEmail
+	 * @return
+	 */
+	public List<Posts> readUserPostsWithinSubject(String userEmail) {
+		Integer usersId = new UserDao().readUserId(userEmail);
+		List<Posts> postsList = new ArrayList<Posts>();
+		List<Map<String, Object>> postsListMap = super.jdbcSetUp()
+				.getSimpleJdbcTemplate()
+				.queryForList(userPostsWithinSubjectSql, usersId);
+		for (Map<String, Object> postsMap : postsListMap) {
+			Posts posts = new Posts();
+			posts.setContent((String) postsMap.get("Content").toString());
+			posts.setTitle((String) postsMap.get("Title").toString());
+			String s_setPosts_id = (String) postsMap.get("Posts_id").toString();
+			posts.setPosts_id(new Integer(s_setPosts_id).intValue());
+			postsList.add(posts);
+		}
+		return postsList;
+	}
+
+	/**
+	 * 
+	 * 
+	 * @param userEmail
+	 * @return
+	 */
+	public List<Posts> readNonUserPostsWithinSubject(String userEmail) {
+		Integer usersId = new UserDao().readUserId(userEmail);
+		List<Posts> postsList = new ArrayList<Posts>();
+		List<Map<String, Object>> postsListMap = super.jdbcSetUp()
+				.getSimpleJdbcTemplate()
+				.queryForList(nonUserPostsWithinSubjectSql, usersId);
+		for (Map<String, Object> postsMap : postsListMap) {
+			Posts posts = new Posts();
+			posts.setContent((String) postsMap.get("Content").toString());
+			posts.setTitle((String) postsMap.get("Title").toString());
+			String s_setPosts_id = (String) postsMap.get("Posts_id").toString();
+			posts.setPosts_id(new Integer(s_setPosts_id).intValue());
+			postsList.add(posts);
+		}
+		return postsList;
+	}
 }
