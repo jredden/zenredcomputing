@@ -172,7 +172,7 @@ public class PostsDAO extends AbstractJDBCDao {
 	}
 
 	/**
-	 * 
+	 * read those posts not posted by the user within a subject
 	 * 
 	 * @param userEmail
 	 * @return
