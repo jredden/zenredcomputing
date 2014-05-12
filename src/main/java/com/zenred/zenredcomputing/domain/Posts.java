@@ -5,6 +5,7 @@ public class Posts {
 	private Integer Posts_id;
 	private String Title;
 	private String Content;
+	private String Datestamp;
 	
 	public Integer getPosts_id() {
 		return Posts_id;
@@ -25,10 +26,16 @@ public class Posts {
 		Content = content;
 	}
 	
+	public String getDatestamp() {
+		return Datestamp;
+	}
+	public void setDatestamp(String datestamp) {
+		Datestamp = datestamp;
+	}
 	@Override
 	public String toString() {
 		return "Posts [Posts_id=" + Posts_id + ", Title=" + Title
-				+ ", Content=" + Content + "]";
+				+ ", Content=" + Content + ", Datestamp=" + Datestamp + "]";
 	}
 	
 	

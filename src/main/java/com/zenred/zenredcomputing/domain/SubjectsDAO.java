@@ -47,7 +47,10 @@ public class SubjectsDAO extends AbstractJDBCDao {
 		
 	}
 	
-	
+	/**
+	 * list all subjects
+	 * @return
+	 */
 	public List<String> readSubjects(){
 		List<String> subjects = null;
 		String sql = "SELECT Subjects_name FROM "+tableName;
@@ -56,6 +59,17 @@ public class SubjectsDAO extends AbstractJDBCDao {
 				.getSimpleJdbcTemplate()
 				.query(sql, new SubjectsName());
 		return subjects;
+	}
+	
+	/**
+	 * 
+	 * @param subject
+	 * @return subjectId
+	 */
+	public Integer fetchSubjectId(String subject){
+		Integer subjectsId = super.jdbcSetUp().getSimpleJdbcTemplate()
+				.queryForInt(subjectIndexSql,subject);
+		return subjectsId;
 	}
 	
 	/**
