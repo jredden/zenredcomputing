@@ -88,9 +88,6 @@ header#topHeader{
 	position: relative;
 	background-color: #8C8B8B;
 }
-nav:#topNav{
-	background-color: #B8B3B3;
-}
 
 #center{
 	position:absolute; 
@@ -119,4 +116,104 @@ nav:#topNav{
    text-align:center;
    color:yellow;
 	font-size: 400%;
+}
+
+#chooseLogin {
+	padding: 0 50px;
+	background-color: #A1A9A9;
+}
+
+#startLogin {
+	background-color: #777777;
+	color: greenyellow;
+	width: 200px;
+}
+
+#requestLogin {
+	padding: 0 50px;
+	background-color: #A3A3A3;
+}
+
+#startLoginRequest {
+	background-color: #666666;
+	color: lightgoldenrodyellow;
+	width: 200px;
+}
+
+#uEmail {
+	background-color: #666666;
+	color: lightgoldenrodyellow;
+}
+
+#loginPassword {
+	background-color: #777777;
+	color: greenyellow;
+}
+
+#uMails {
+	background-color: #666666;
+}
+
+#loginPasswords {
+	background-color: #777777;
+}
+#answerQuestionOne{
+	margin-right: 40%;
+	width:65%;
+	background-color: #AAAAAA;
+}
+
+#questionHeader, #questionHeader2, #math{
+	width:65%;
+	background-color: #999999;
+}
+#knum{
+	color: yellow;
+}
+
+#question0, #firstName, #eMail, #password2{
+	width:65%;
+	background-color: #777777;
+}
+#question1, #lastName, #password1{
+	width:65%;
+	background-color: #666667;
+}
+#question2{
+	width:65%;
+	background-color: #AA9995;
+}
+#question3{
+	width:65%;
+	background-color: #999997;
+}
+
+#uQ1 {
+	margin-left: 29px;
+	width:20%;
+	background-color: #DDDDDD;
+}
+
+#uQ2 {
+	margin-left: 10px;
+	width:20%;
+	background-color: #CCCCCC;
+}
+#fn1 {
+	margin-left: 14px;
+}
+#ln1 {
+	margin-left: 15px;
+}
+#em1, #pw1, #pw2 {
+	margin-left: 128px;
+}
+
+nav:#topNav {
+	background-color: #B8B3B3;
+}
+
+.button{
+	margin-left: 107px;
+	background-color:orange;
 }
