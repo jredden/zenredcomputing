@@ -169,8 +169,8 @@ $(document).ready(function() {
 	function processCreateLoginJson(json) {
 		console.log("createLogin:");
 		if(json.createMessageResponse.theMessage.indexOf("SUCCESS") != -1){
-			var showList = ['cosmosSect'];
-   		var hideList = ['blogSect', 'resumeSect', 'johntreddenSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin'];
+			var showList = ['blogSect'];
+   		var hideList = ['resumeSect', 'johntreddenSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin'];
 			tagOperations.both(showList, hideList);
 			sessionStorage.setItem('LOGIN', true);
 		}
@@ -233,7 +233,7 @@ $(document).ready(function() {
 		if(sessionStorage.LOGIN){
 			console.log("Already logged in");
 			var showList = ['blogSect'];
-   			var hideList = ['johntreddenSect', 'openSourceSect','resumeSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin', 'blogSect'];
+   			var hideList = ['johntreddenSect', 'openSourceSect','resumeSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin'];
 		}
 		else{
 			var showList = ['login_op'];
@@ -241,7 +241,7 @@ $(document).ready(function() {
 		}
 		tagOperations.both(showList, hideList);
 	});	
-	$("#openSourceSect").click(function () {
+	$("#openSource").click(function () {
 		console.log("in openSource"); 
 		var showList = ['openSourceSect'];
 		var hideList = ['johntreddenSect','resumeSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin', 'blogSect'];
@@ -251,7 +251,7 @@ $(document).ready(function() {
 	
 	$("#startLogin").click(function(){
 		var showList = ['emailAndPassword']
-		var hideList = ['johntreddenSect','resumeSect','login_op', 'answerQuestionOne', 'createLogin', 'openSourceSect'];
+		var hideList = ['johntreddenSect','resumeSect','login_op', 'answerQuestionOne', 'createLogin'];
 		tagOperations.both(showList, hideList);
 	});
 	
@@ -347,6 +347,7 @@ var processRequest = (function () {
 </section>
 
 <section id="blogSect">
+HERE
 </section>
 
 <section id="login_op">
