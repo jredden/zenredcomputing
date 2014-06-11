@@ -308,6 +308,26 @@ var processRequest = (function () {
 	}
 })();
 
+var seeCat0 = (function () {
+	return{
+		jsonCall: function(){
+			console.log("start top level category");
+			$.getJSON("http://www.zenredcomputinglocal.com:8080/category.html",
+					function(json){           // callback
+					console.log("in cat 0");
+					jsonCategory.Category0(json);
+					}		
+			);
+		}
+	}
+})();
+
+var jsonCategory = (function () {
+	return{
+		Category0: function(json){
+		}
+	}
+})();
 	
 
 
