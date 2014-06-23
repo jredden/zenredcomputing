@@ -325,6 +325,9 @@ var seeCat0 = (function () {
 var jsonCategory = (function () {
 	return{
 		Category0: function(json){
+			for (var idex = 0; idex < json.subjectsResponse.subjects.string.length; idex++) {
+				console.log(json.subjectsResponse.subjects.string[idex]);
+			}
 		}
 	}
 })();
