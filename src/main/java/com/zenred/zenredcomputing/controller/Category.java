@@ -16,7 +16,7 @@ public class Category implements Controller {
 
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		subjectsDAO = new SubjectsDAO();
 		String [] subjects = subjectsDAO.readSubjects().toArray(new String []{});
 		SubjectsResponse subjectsResponse = new SubjectsResponse();
