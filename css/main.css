@@ -217,3 +217,20 @@ nav:#topNav {
 	margin-left: 107px;
 	background-color:orange;
 }
+
+#blogMenu{
+	"background-color:#EEEEEE;
+	height:80%;
+	width:20%;
+	float:left;
+	color:yellow;
+}
+
+#spacer{
+	width:25%;
+}
+
+#blogContent{
+	"background-color:#EEEEEE;
+	height:80%;width:80%;float:left;"
+}

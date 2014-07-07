@@ -326,9 +326,16 @@ var seeCat0 = (function () {
 var jsonCategory = (function () {
 	return{
 		Category0: function(json){
+			$(blogSect).html("<div id=\"blogMenu\"><b>Choose a General Blog Topic </b>");
 			for (var idex = 0; idex < json.subjectsResponse.subjects.string.length; idex++) {
 				console.log(json.subjectsResponse.subjects.string[idex]);
+				$(blogSect).append("<div id=\"spacer\"><a href=\"http://www.zenredcomputinglocal.com:8080/generalTopic.html?subject="
+				+json.subjectsResponse.subjects.string[idex]
+				+"\">"
+				+json.subjectsResponse.subjects.string[idex]
+				+"</a></div>");
 			}
+			$("#blogSect").show();
 		}
 	}
 })();
@@ -371,7 +378,7 @@ var jsonCategory = (function () {
 </section>
 
 <section id="blogSect">
-HERE
+
 </section>
 
 <section id="login_op">
