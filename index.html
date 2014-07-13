@@ -146,7 +146,9 @@ $(document).ready(function() {
 			var showList = ['blogSect'];
 			var hideList = ['emailAndPassword','resumeSect', 'answerQuestionOne', 'createLogin'];
 			tagOperations.both(showList, hideList);
+			var emailAddress = json.basicMesage.emailAddress;
 			sessionStorage.setItem('LOGIN', true);
+			sessionStorage.setItem('EMAIL', emailAddress);
 		}
 		else{
 			alert("login failed  ... select home and try again");
@@ -167,12 +169,13 @@ $(document).ready(function() {
 	});
 
 	function processCreateLoginJson(json) {
-		console.log("createLogin:");
+		console.log("createLogin:"+json.createMessageResponse.emailAddress);
 		if(json.createMessageResponse.theMessage.indexOf("SUCCESS") != -1){
 			var showList = ['blogSect'];
    		var hideList = ['resumeSect', 'johntreddenSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin'];
 			tagOperations.both(showList, hideList);
 			sessionStorage.setItem('LOGIN', true);
+			sessionStorage.setItem('EMAIL', emailAddress);
 		}
 		else{
 			alert("There is an error in what you typed:"+json.createMessageResponse.theMessage);
@@ -326,11 +329,15 @@ var seeCat0 = (function () {
 var jsonCategory = (function () {
 	return{
 		Category0: function(json){
+			var email = sessionStorage.EMAIL;
+			console.log("EMAIL:"+email);
 			$(blogSect).html("<div id=\"blogMenu\"><b>Choose a General Blog Topic </b>");
 			for (var idex = 0; idex < json.subjectsResponse.subjects.string.length; idex++) {
 				console.log(json.subjectsResponse.subjects.string[idex]);
 				$(blogSect).append("<div id=\"spacer\"><a href=\"http://www.zenredcomputinglocal.com:8080/generalTopic.html?subject="
 				+json.subjectsResponse.subjects.string[idex]
+				+"&emailAddress="
+				+email
 				+"\">"
 				+json.subjectsResponse.subjects.string[idex]
 				+"</a></div>");

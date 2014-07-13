@@ -54,6 +54,7 @@ public class Login implements Controller {
 			return modelAndView;
 		}
 		basicMessageResponse.setTheMessage("Passed");
+		basicMessageResponse.setEmailAddress(emailAddress);
 		modelAndView.addObject(BasicMessageView.JSON_ROOT, basicMessageResponse);
 		return modelAndView;
 	}

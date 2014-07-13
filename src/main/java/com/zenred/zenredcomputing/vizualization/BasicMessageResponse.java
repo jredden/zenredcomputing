@@ -11,6 +11,7 @@ public class BasicMessageResponse {
 	private List<String> questionList;
 	private Integer questionNumber;
 	private String secondQuestion;
+	private String emailAddress;
 
 
 	public String getTheMessage() {
@@ -45,11 +46,20 @@ public class BasicMessageResponse {
 		this.secondQuestion = secondQuestion;
 	}
 
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
 	@Override
 	public String toString() {
 		return "BasicMessageResponse [theMessage=" + theMessage
 				+ ", questionList=" + questionList + ", questionNumber="
-				+ questionNumber + ", secondQuestion=" + secondQuestion + "]";
+				+ questionNumber + ", secondQuestion=" + secondQuestion
+				+ ", emailAddress=" + emailAddress + "]";
 	}
 	
 	

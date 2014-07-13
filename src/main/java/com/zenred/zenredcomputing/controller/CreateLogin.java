@@ -53,6 +53,7 @@ public class CreateLogin implements Controller, StateIF {
 		UserDao userDao = new UserDao();
 		userDao.createUser(user);
 		createLoginResponse.setTheMessage("SUCCESS");
+		createLoginResponse.setEmailAddress(emailAddress);
 		modelAndView.addObject(CreateLoginView.JSON_ROOT, createLoginResponse);
 		return modelAndView;
 

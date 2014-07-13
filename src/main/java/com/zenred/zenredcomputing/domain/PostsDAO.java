@@ -37,7 +37,7 @@ public class PostsDAO extends AbstractJDBCDao {
 			+ joinTableName2
 			+ " stp ON po.Posts_id = stp.Posts_id "
 			+" WHERE uts.Subjects_id = stp.Subjects_id AND utp.User_id = ? "
-			+" AND stp.Subjects_id = ?"
+			+" AND stp.Subjects_id = ? ORDER BY po.Datestamp"
 			;
 
 	private String nonUserPostsSql = "SELECT po.Title, po.Content, po.Datestamp, po.Posts_id FROM "
@@ -57,7 +57,7 @@ public class PostsDAO extends AbstractJDBCDao {
 			+ joinTableName2
 			+ " stp ON po.Posts_id = stp.Posts_id "
 			+" WHERE uts.Subjects_id = stp.Subjects_id AND utp.User_id != ? "
-			+" AND stp.Subjects_id = ?"
+			+" AND stp.Subjects_id = ? ORDER BY po.Datestamp"
 			;
 
 	
