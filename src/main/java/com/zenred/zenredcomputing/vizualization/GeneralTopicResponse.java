@@ -7,14 +7,14 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("TopicRespone")
 public class GeneralTopicResponse {
 
-	private List<VisualizationCentricPosts> visualizationCentricPosts;
+	private List<VisualizationCentricPostsResponse> visualizationCentricPosts;
 
-	public List<VisualizationCentricPosts> getVisualizationCentricPosts() {
+	public List<VisualizationCentricPostsResponse> getVisualizationCentricPosts() {
 		return visualizationCentricPosts;
 	}
 
 	public void setVisualizationCentricPosts(
-			List<VisualizationCentricPosts> visualizationCentricPosts) {
+			List<VisualizationCentricPostsResponse> visualizationCentricPosts) {
 		this.visualizationCentricPosts = visualizationCentricPosts;
 	}
 

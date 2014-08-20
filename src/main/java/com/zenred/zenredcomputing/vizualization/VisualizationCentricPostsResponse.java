@@ -1,6 +1,7 @@
 package com.zenred.zenredcomputing.vizualization;
 
-public class VisualizationCentricPosts {
+
+public class VisualizationCentricPostsResponse {
 	
 	private boolean ownedByUser;
 	private int order;

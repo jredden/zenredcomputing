@@ -1,11 +1,13 @@
 package com.zenred.zenredcomputing.domain;
 
-public class Posts {
+public class Posts implements DateStampIF, StateIF{
 
 	private Integer Posts_id;
 	private String Title;
 	private String Content;
 	private String Datestamp;
+	
+	private String state;
 	
 	public Integer getPosts_id() {
 		return Posts_id;
@@ -32,10 +34,18 @@ public class Posts {
 	public void setDatestamp(String datestamp) {
 		Datestamp = datestamp;
 	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	@Override
 	public String toString() {
 		return "Posts [Posts_id=" + Posts_id + ", Title=" + Title
-				+ ", Content=" + Content + ", Datestamp=" + Datestamp + "]";
+				+ ", Content=" + Content + ", Datestamp=" + Datestamp
+				+ ", state=" + state + "]";
 	}
 	
 	
