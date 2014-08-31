@@ -349,17 +349,12 @@ var seeCat0 = (function () {
 var jsonCategory = (function () {
 	return{
 		Category0: function(json){
-			$(blogSect).html("<div id=\"blogMenu\"><b>Choose a General Blog Topic </b>");
-			$(blogSect).append("<nav>");
 			for (var idex = 0; idex < json.subjectsResponse.subjects.string.length; idex++) {
 				var category = json.subjectsResponse.subjects.string[idex];
 				var category2 = category.replace(' ','_');
 				category2 = category2.replace(' ','_');
-				var line = "<div id=\""+category2+"\"><a href=\"#"+category2+ "\" "+"id=\""+category2+"\"\>"
-				+json.subjectsResponse.subjects.string[idex]
-				+"</a></div>";
+				var line = "<button id=\""+category2+"\">"+json.subjectsResponse.subjects.string[idex]+ "</button>";
 				console.log("line:"+line);
-				$(blogSect).append(line);
 			}
 			$("#blogSect").show();
 		},
@@ -376,7 +371,7 @@ var blogRequest = (function () {
 			var email = sessionStorage.EMAIL;
 			console.log("click EMAIL:"+email);
 			$.getJSON("http://www.zenredcomputinglocal.com:8080/generalTopic.html?subject="
-			+catergory
+			+category
 			+"&emailAddress="
 			+email,
 			function(json){
@@ -424,7 +419,13 @@ var blogRequest = (function () {
 </section>
 
 <section id="blogSect">
-
+<div id="blogMenu"><b>Choose a General Blog Topic </b></div>
+<nav>
+<button id="Computer_History">Computer History</button>
+<button id="Computer_Languages">Computer Languages</button> 
+<button id="Inclusive_Software_Engineering">Inclusive Software Engineering</button> 
+<button id="Business_Stories">Business Stories</button> 
+</nav>
 </section>
 
 <section id="login_op">
