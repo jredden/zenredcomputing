@@ -21,7 +21,7 @@ public class GeneralTopic implements Controller {
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		response.addHeader("Access-Control-Allow-Origin", "*");
-		String emailAddress = request.getParameter("email");
+		String emailAddress = request.getParameter("emailAddress");
 		String subject = request.getParameter("subject");
 		PostsDAO postsDAO = new PostsDAO();
 		List<Posts> notUsersPosts = postsDAO.readNonUserPostsWithinSubject(emailAddress, subject);

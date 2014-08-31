@@ -68,6 +68,31 @@ public class  DateOperation <Obj>{
 		int indexOne = 0;
 		int indexTwo = 0;
 		boolean done = true;
+		
+		if(0 == listOne.size() && 0 == listTwo.size()){
+			return combinedList;  // initial state, nothing there
+		}
+		if(0 == listOne.size()){
+			Obj obj2 = listTwo.get(indexTwo);
+			DateStampIF dateStampIF2 = (DateStampIF)obj2;
+			StateIF stateIF2 = (StateIF)obj2;
+			for(; indexTwo < sizeTwo; indexTwo++){
+				((StateIF)listTwo.get(indexTwo)).setState("true");
+				combinedList.add(listTwo.get(indexTwo));
+			}
+			return combinedList;	// first degenerate case
+		}
+		if(0 == listTwo.size()){
+			Obj obj1 = listOne.get(indexOne);
+			DateStampIF dateStampIF1 = (DateStampIF)obj1;
+			StateIF stateIF1 = (StateIF)obj1;
+			for(; indexOne < sizeOne; indexOne++){
+				((StateIF)listOne.get(indexOne)).setState("false");
+				combinedList.add(listOne.get(indexOne));
+			}
+			return combinedList;	// second degenerate case
+		}
+
 		Obj obj1 = listOne.get(indexOne);
 		Obj obj2 = listTwo.get(indexTwo);
 		DateStampIF dateStampIF1 = (DateStampIF)obj1;

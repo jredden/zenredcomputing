@@ -145,10 +145,12 @@ $(document).ready(function() {
 		if(json.basicMesage.theMessage.indexOf("Passed") != -1){
 			var showList = ['blogSect'];
 			var hideList = ['emailAndPassword','resumeSect', 'answerQuestionOne', 'createLogin'];
-			tagOperations.both(showList, hideList);
 			var emailAddress = json.basicMesage.emailAddress;
 			sessionStorage.setItem('LOGIN', true);
 			sessionStorage.setItem('EMAIL', emailAddress);
+			seeCat0.jsonCall();
+			tagOperations.both(showList, hideList);
+			console.log("in Passed");
 		}
 		else{
 			alert("login failed  ... select home and try again");
@@ -264,6 +266,24 @@ $(document).ready(function() {
 		tagOperations.hide(hideList);
 		accessRequest.jsonCall();
 	});
+
+	
+	$("#Computer_History").click(function(){
+		console.log("Computer History");
+		blogRequest.jsonCall("Computer History");
+	});
+	$("#Computer_Languages").click(function(){
+		console.log("Computer Languages");
+		blogRequest.jsonCall("Computer Languages");
+	});
+	$("#Inclusive_Software_Engineering").click(function(){
+		console.log("Inclusive Software Engineering");
+		blogRequest.jsonCall("Inclusive Software Engineering");
+	});
+	$("#Business_Stories").click(function(){
+		console.log("Business Stories");
+		blogRequest.jsonCall("Business Stories");
+	});
 	
 	$("#johntredden").click(function(){
 		window.location = "http://www.johntredden.com";
@@ -329,24 +349,43 @@ var seeCat0 = (function () {
 var jsonCategory = (function () {
 	return{
 		Category0: function(json){
-			var email = sessionStorage.EMAIL;
-			console.log("EMAIL:"+email);
 			$(blogSect).html("<div id=\"blogMenu\"><b>Choose a General Blog Topic </b>");
+			$(blogSect).append("<nav>");
 			for (var idex = 0; idex < json.subjectsResponse.subjects.string.length; idex++) {
-				console.log(json.subjectsResponse.subjects.string[idex]);
-				$(blogSect).append("<div id=\"spacer\"><a href=\"http://www.zenredcomputinglocal.com:8080/generalTopic.html?subject="
+				var category = json.subjectsResponse.subjects.string[idex];
+				var category2 = category.replace(' ','_');
+				category2 = category2.replace(' ','_');
+				var line = "<div id=\""+category2+"\"><a href=\"#"+category2+ "\" "+"id=\""+category2+"\"\>"
 				+json.subjectsResponse.subjects.string[idex]
-				+"&emailAddress="
-				+email
-				+"\">"
-				+json.subjectsResponse.subjects.string[idex]
-				+"</a></div>");
+				+"</a></div>";
+				console.log("line:"+line);
+				$(blogSect).append(line);
 			}
 			$("#blogSect").show();
+		},
+		Category1: function(json){
+			console.log(json);
 		}
 	}
 })();
 	
+var blogRequest = (function () {
+	return{
+		jsonCall: function(category){
+			console.log("blog request:"+category);
+			var email = sessionStorage.EMAIL;
+			console.log("click EMAIL:"+email);
+			$.getJSON("http://www.zenredcomputinglocal.com:8080/generalTopic.html?subject="
+			+catergory
+			+"&emailAddress="
+			+email,
+			function(json){
+				jsonCategory.Category1(json);
+				}		
+			);
+		}
+	}
+})();
 
 
 
