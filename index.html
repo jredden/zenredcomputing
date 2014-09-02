@@ -13,6 +13,7 @@ ScienceFictionSoftware,
 <script type="text/javascript" src="../js/jquery.form.js"></script>
 <script type="text/javascript" >
 
+
 var questionNumber = '0';
 var addQuestion = '0+0';
 var formData = { questionNumber1:questionNumber, questionNumber2:addQuestion, questionNumber3:'0+0' }
@@ -426,6 +427,13 @@ var blogRequest = (function () {
 <button id="Inclusive_Software_Engineering">Inclusive Software Engineering</button> 
 <button id="Business_Stories">Business Stories</button> 
 </nav>
+<form action="" method="post" id="ckform">
+			<textarea class="ckeditor" name="editor1">
+                This is my textarea to be replaced with CKEditor.
+            </textarea>    
+            <script src="../ckeditor/adapters/jquery.js"></script>
+    		<input type="submit" value="Submit" />
+</form>
 </section>
 
 <section id="login_op">
