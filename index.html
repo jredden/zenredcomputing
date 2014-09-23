@@ -6,7 +6,7 @@
 ScienceFictionSoftware, 
 ",
 "Zenred Computing" />
-
+ 
 <link href="css/main.css" rel="stylesheet" type="text/css">
 
 <script src="../js/jquery-1.8.1.min.js" type="text/javascript"></script>
@@ -47,6 +47,9 @@ var tagOperations = (function(){
 	   				},	
 	   				function blogSect(){
 	   					$('#blogSect').show();
+	   				},
+	   				function blogContent(){
+	   					$('#blogContent').show();
 	   				}	
 	];
 	var hideOperations = [
@@ -76,7 +79,14 @@ var tagOperations = (function(){
 	   			},
 	   			function blogSect(){
 	   				$('#blogSect').hide();
-	   			}
+	   			},
+	   			function blogContent(){
+	   				if(typeof CKEDITOR.instances['element_name'] != 'undefined') {
+				    CKEDITOR.instances['element_name'].updateElement();
+				    CKEDITOR.instances['element_name'].destroy();
+					}
+	   				$('#blogContent').hide();
+	   			}	   			
 				
 	];
 
@@ -89,7 +99,8 @@ var tagOperations = (function(){
 			"questions1" :5,
 			"answerQuestionOne" : 6,
 			"createLogin" :7,
-			"blogSect" :8
+			"blogSect" :8,
+			"blogContent" :9
 	};
 	
 	// public 
@@ -127,7 +138,7 @@ var tagOperations = (function(){
 $(document).ready(function() {
 	console.log("in ready");
 	tagOperations.hideAll();
-
+	$('#blogContent').hide();
 
 	$('#LoginFormID').ajaxForm({ 
 		dataType:  'json', 
@@ -427,13 +438,19 @@ var blogRequest = (function () {
 <button id="Inclusive_Software_Engineering">Inclusive Software Engineering</button> 
 <button id="Business_Stories">Business Stories</button> 
 </nav>
+</section>
+
+<section id="addBlog">
+<div id="#blogContent">
 <form action="" method="post" id="ckform">
 			<textarea class="ckeditor" name="editor1">
-                This is my textarea to be replaced with CKEditor.
+                Enter your blog entry here.
             </textarea>    
+            <script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
             <script src="../ckeditor/adapters/jquery.js"></script>
     		<input type="submit" value="Submit" />
 </form>
+</div>
 </section>
 
 <section id="login_op">
