@@ -50,6 +50,7 @@ var tagOperations = (function(){
 	   				},
 	   				function blogContent(){
 	   					$('#blogContent').show();
+	   					$('#form1').hide();
 	   				}	
 	];
 	var hideOperations = [
@@ -81,11 +82,8 @@ var tagOperations = (function(){
 	   				$('#blogSect').hide();
 	   			},
 	   			function blogContent(){
-	   				if(typeof CKEDITOR.instances['element_name'] != 'undefined') {
-				    CKEDITOR.instances['element_name'].updateElement();
-				    CKEDITOR.instances['element_name'].destroy();
-					}
 	   				$('#blogContent').hide();
+	   				$('#form1').hide();
 	   			}	   			
 				
 	];
@@ -442,14 +440,14 @@ var blogRequest = (function () {
 
 <section id="addBlog">
 <div id="#blogContent">
-<form action="" method="post" id="ckform">
-			<textarea class="ckeditor" name="editor1">
-                Enter your blog entry here.
-            </textarea>    
-            <script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
-            <script src="../ckeditor/adapters/jquery.js"></script>
-    		<input type="submit" value="Submit" />
+
+<form action="x.html" method="post" id="form1">
+<textarea class="ckeditor" name="editor1">
+                This is my textarea to be replaced with CKEditor.
+</textarea>
+<input type="submit" value="Submit" />
 </form>
+
 </div>
 </section>
 
