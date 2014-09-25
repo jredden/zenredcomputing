@@ -50,7 +50,9 @@ var tagOperations = (function(){
 	   				},
 	   				function blogContent(){
 	   					$('#blogContent').show();
-	   					$('#form1').hide();
+	   				},
+		   			function blogForm(){
+		   				$('#blogForm').show();
 	   				}	
 	];
 	var hideOperations = [
@@ -83,7 +85,10 @@ var tagOperations = (function(){
 	   			},
 	   			function blogContent(){
 	   				$('#blogContent').hide();
-	   				$('#form1').hide();
+	   				$('#blogForm').hide();
+	   			},
+	   			function blogForm(){
+	   				$('#blogForm').hide();
 	   			}	   			
 				
 	];
@@ -98,7 +103,8 @@ var tagOperations = (function(){
 			"answerQuestionOne" : 6,
 			"createLogin" :7,
 			"blogSect" :8,
-			"blogContent" :9
+			"blogContent" :9,
+			"blogForm" :10
 	};
 	
 	// public 
@@ -239,7 +245,7 @@ $(document).ready(function() {
 	$("#resume").click(function () { 
 		console.log("in resume");
 		var showList = ['resumeSect'];
-		var hideList = ['johntreddenSect','openSourceSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin', 'blogSect'];
+		var hideList = ['johntreddenSect','openSourceSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin', 'blogSect', 'blogForm'];
 		tagOperations.both(showList, hideList);
 	});
 	
@@ -248,31 +254,31 @@ $(document).ready(function() {
 		if(sessionStorage.LOGIN){
 			console.log("Already logged in");
 			var showList = ['blogSect'];
-   			var hideList = ['johntreddenSect', 'openSourceSect','resumeSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin'];
+   			var hideList = ['johntreddenSect', 'openSourceSect','resumeSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin', 'blogForm'];
    			seeCat0.jsonCall();
 		}
 		else{
 			var showList = ['login_op'];
-			var hideList = ['johntreddenSect','resumeSect','openSourceSect','emailAndPassword','blogSect','questions1','answerQuestionOne', 'createLogin'];
+			var hideList = ['johntreddenSect','resumeSect','openSourceSect','emailAndPassword','blogSect','questions1','answerQuestionOne', 'createLogin','blogForm'];
 		}
 		tagOperations.both(showList, hideList);
 	});	
 	$("#openSource").click(function () {
 		console.log("in openSource"); 
 		var showList = ['openSourceSect'];
-		var hideList = ['johntreddenSect','resumeSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin', 'blogSect'];
+		var hideList = ['johntreddenSect','resumeSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin', 'blogSect','blogForm'];
 		tagOperations.both(showList, hideList);
 
 	});
 	
 	$("#startLogin").click(function(){
 		var showList = ['emailAndPassword']
-		var hideList = ['johntreddenSect','resumeSect','login_op', 'answerQuestionOne', 'createLogin'];
+		var hideList = ['johntreddenSect','resumeSect','login_op', 'answerQuestionOne', 'createLogin','blogForm'];
 		tagOperations.both(showList, hideList);
 	});
 	
 	$("#startLoginRequest").click(function(){
-		var hideList = ['johntreddenSect', 'resumeSect','login_op', 'answerQuestionOne', 'createLogin', 'openSourceSect'];
+		var hideList = ['johntreddenSect', 'resumeSect','login_op', 'answerQuestionOne', 'createLogin', 'openSourceSect', 'blogForm'];
 		tagOperations.hide(hideList);
 		accessRequest.jsonCall();
 	});
@@ -280,18 +286,26 @@ $(document).ready(function() {
 	
 	$("#Computer_History").click(function(){
 		console.log("Computer History");
+		var showList = ['blogForm'];
+		tagOperations.show(showList);
 		blogRequest.jsonCall("Computer History");
 	});
 	$("#Computer_Languages").click(function(){
 		console.log("Computer Languages");
+		var showList = ['blogForm'];
+		tagOperations.show(showList);
 		blogRequest.jsonCall("Computer Languages");
 	});
 	$("#Inclusive_Software_Engineering").click(function(){
 		console.log("Inclusive Software Engineering");
+		var showList = ['blogForm'];
+		tagOperations.show(showList);
 		blogRequest.jsonCall("Inclusive Software Engineering");
 	});
 	$("#Business_Stories").click(function(){
 		console.log("Business Stories");
+		var showList = ['blogForm'];
+		tagOperations.show(showList);
 		blogRequest.jsonCall("Business Stories");
 	});
 	
@@ -441,7 +455,7 @@ var blogRequest = (function () {
 <section id="addBlog">
 <div id="#blogContent">
 
-<form action="x.html" method="post" id="form1">
+<form action="x.html" method="post" id="blogForm">
 <textarea class="ckeditor" name="editor1">
                 This is my textarea to be replaced with CKEditor.
 </textarea>
