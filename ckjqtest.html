@@ -12,12 +12,16 @@
 <script type="text/javascript" >
 
 $(document).ready(function() {
-$( 'textarea#editor1' ).ckeditor()
+$( 'textarea#editor1' ).ckeditor();
+ $( 'textarea' ).ckeditor( {
+     uiColor: '#9AB8F3'
+ } );
+ CKEDITOR.instances['editor1'].setData('hi');
 
 });
 
 </script>
-
+<body>
 <a onClick="$('#form1').hide();">Hide</a>
 <a onClick="$('#form1').show();">Show</a>
 <form action="x.html" method="post" id="form1">

@@ -143,7 +143,8 @@ var tagOperations = (function(){
 
 $(document).ready(function() {
 	console.log("in ready");
-	$( 'textarea#editor1' ).ckeditor()
+	$( 'textarea#editor1' ).ckeditor();
+ 
 	tagOperations.hideAll();
 	$('#blogContent').hide();
 
@@ -300,24 +301,29 @@ $(document).ready(function() {
 	
 	$("#Computer_History").click(function(){
 		console.log("Computer History");
+		console.log(CKEDITOR.instances['blogText']);
+		CKEDITOR.instances['blogText'].setData('Subject: Computer History');
 		var showList = ['blogForm'];
 		tagOperations.show(showList);
 		blogRequest.jsonCall("Computer History");
 	});
 	$("#Computer_Languages").click(function(){
 		console.log("Computer Languages");
+		CKEDITOR.instances['blogText'].setData('Subject: Computer Languages');
 		var showList = ['blogForm'];
 		tagOperations.show(showList);
 		blogRequest.jsonCall("Computer Languages");
 	});
 	$("#Inclusive_Software_Engineering").click(function(){
 		console.log("Inclusive Software Engineering");
+		CKEDITOR.instances['blogText'].setData('Inclusive Software Engineering');
 		var showList = ['blogForm'];
 		tagOperations.show(showList);
 		blogRequest.jsonCall("Inclusive Software Engineering");
 	});
 	$("#Business_Stories").click(function(){
 		console.log("Business Stories");
+		CKEDITOR.instances['blogText'].setData('Business Stories');
 		var showList = ['blogForm'];
 		tagOperations.show(showList);
 		blogRequest.jsonCall("Business Stories");
@@ -327,6 +333,7 @@ $(document).ready(function() {
 		window.location = "http://www.johntredden.com";
 	});
 });
+
 
 // invoke accessRequest endpoint associated to startLogin event
 var accessRequest = (function () {
@@ -477,8 +484,8 @@ var blogRequest = (function () {
 <section id="addBlog">
 <div id="#blogContent">
 
-<form action="x.html" method="post" id="blogForm">
-<textarea class="ckeditor" name="editor1">
+<form action="blogPost.html" method="post" id="blogForm">
+<textarea class="ckeditor" name="editor1" id="blogText">
                 This is my textarea to be replaced with CKEditor.
 </textarea>
 <input type="submit" value="Submit" />
