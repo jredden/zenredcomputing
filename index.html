@@ -143,6 +143,7 @@ var tagOperations = (function(){
 
 $(document).ready(function() {
 	console.log("in ready");
+
 	$( 'textarea#editor1' ).ckeditor();
  
 	tagOperations.hideAll();
@@ -303,6 +304,7 @@ $(document).ready(function() {
 		console.log("Computer History");
 		console.log(CKEDITOR.instances['blogText']);
 		CKEDITOR.instances['blogText'].setData('Subject: Computer History');
+		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#C9C9C9');
 		var showList = ['blogForm'];
 		tagOperations.show(showList);
 		blogRequest.jsonCall("Computer History");
@@ -310,20 +312,23 @@ $(document).ready(function() {
 	$("#Computer_Languages").click(function(){
 		console.log("Computer Languages");
 		CKEDITOR.instances['blogText'].setData('Subject: Computer Languages');
+		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#D4D4D4');
 		var showList = ['blogForm'];
 		tagOperations.show(showList);
 		blogRequest.jsonCall("Computer Languages");
 	});
 	$("#Inclusive_Software_Engineering").click(function(){
 		console.log("Inclusive Software Engineering");
-		CKEDITOR.instances['blogText'].setData('Inclusive Software Engineering');
+		CKEDITOR.instances['blogText'].setData('Subject: Inclusive Software Engineering');
+		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#DBDBDB');
 		var showList = ['blogForm'];
 		tagOperations.show(showList);
 		blogRequest.jsonCall("Inclusive Software Engineering");
 	});
 	$("#Business_Stories").click(function(){
 		console.log("Business Stories");
-		CKEDITOR.instances['blogText'].setData('Business Stories');
+		CKEDITOR.instances['blogText'].setData('Subject: Business Stories');
+		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#E0E0E0');
 		var showList = ['blogForm'];
 		tagOperations.show(showList);
 		blogRequest.jsonCall("Business Stories");
