@@ -19,6 +19,7 @@
 	<bean id="createLogin" class="com.zenred.zenredcomputing.controller.CreateLogin"/>
 	<bean id="category" class="com.zenred.zenredcomputing.controller.Category"/>
 	<bean id="generalTopic" class="com.zenred.zenredcomputing.controller.GeneralTopic"/>
+	<bean id="blogPost" class="com.zenred.zenredcomputing.controller.BlogPost"/>
 	
 	<bean id="urlMapping"
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -30,6 +31,7 @@
 				<prop key="/createLogin.html">createLogin</prop>
 				<prop key="/category.html">category</prop>
 				<prop key="/generalTopic.html">generalTopic</prop>
+				<prop key="/blogPost.html">blogPost</prop>
 			</props>
 		</property>
 	</bean>

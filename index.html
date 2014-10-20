@@ -303,7 +303,11 @@ $(document).ready(function() {
 	$("#Computer_History").click(function(){
 		console.log("Computer History");
 		console.log(CKEDITOR.instances['blogText']);
-		CKEDITOR.instances['blogText'].setData('Subject: Computer History');
+		CKEDITOR.instances['blogText'].setData('From: ' 
+			+ sessionStorage.EMAIL + "<p/>"
+			+'Subject: Computer History'
+			+"<p/>Title:</p>"
+			+'Start Entry:');
 		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#C9C9C9');
 		var showList = ['blogForm'];
 		tagOperations.show(showList);
@@ -311,7 +315,11 @@ $(document).ready(function() {
 	});
 	$("#Computer_Languages").click(function(){
 		console.log("Computer Languages");
-		CKEDITOR.instances['blogText'].setData('Subject: Computer Languages');
+		CKEDITOR.instances['blogText'].setData('From: ' 
+			+ sessionStorage.EMAIL + "<p/>"
+			+'Subject: Computer Languages'
+			+"<p/>Title:</p>"
+			+'Start Entry:');
 		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#D4D4D4');
 		var showList = ['blogForm'];
 		tagOperations.show(showList);
@@ -319,7 +327,11 @@ $(document).ready(function() {
 	});
 	$("#Inclusive_Software_Engineering").click(function(){
 		console.log("Inclusive Software Engineering");
-		CKEDITOR.instances['blogText'].setData('Subject: Inclusive Software Engineering');
+		CKEDITOR.instances['blogText'].setData('From: ' 
+			+ sessionStorage.EMAIL + "<p/>"
+			+'Subject: Inclusive Software Engineering'
+			+"<p/>Title:</p>"
+			+'Start Entry:');
 		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#DBDBDB');
 		var showList = ['blogForm'];
 		tagOperations.show(showList);
@@ -327,11 +339,20 @@ $(document).ready(function() {
 	});
 	$("#Business_Stories").click(function(){
 		console.log("Business Stories");
-		CKEDITOR.instances['blogText'].setData('Subject: Business Stories');
+		CKEDITOR.instances['blogText'].setData('From: ' 
+			+ sessionStorage.EMAIL + "<p/>"
+			+'Subject: Business Stories'
+			+"<p/>Title:</p>"
+			+'Start Entry:');
 		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#E0E0E0');
 		var showList = ['blogForm'];
 		tagOperations.show(showList);
 		blogRequest.jsonCall("Business Stories");
+	});
+	
+	$("#blogSubmit").click(function(){
+		console.log("BLOG SUBMIT");
+		document.getElementById('emailAddressId').value=sessionStorage.EMAIL;
 	});
 	
 	$("#johntredden").click(function(){
@@ -421,7 +442,7 @@ var jsonCategory = (function () {
 })();
 
 // called by category event handlers
-// 	invokes end point processor for selected category
+// 	invokes end point processor for selectemailAddressIded category
 var blogRequest = (function () {
 	return{
 		jsonCall: function(category){
@@ -489,11 +510,12 @@ var blogRequest = (function () {
 <section id="addBlog">
 <div id="#blogContent">
 
-<form action="blogPost.html" method="post" id="blogForm">
+<form action="http://www.zenredcomputinglocal.com:8080/blogPost.html" method="post" id="blogForm">
 <textarea class="ckeditor" name="editor1" id="blogText">
                 This is my textarea to be replaced with CKEditor.
 </textarea>
-<input type="submit" value="Submit" />
+
+<input type="submit" value="Submit" id="blogSubmit" />
 </form>
 
 </div>
