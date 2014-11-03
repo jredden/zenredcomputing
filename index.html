@@ -351,8 +351,15 @@ $(document).ready(function() {
 	});
 	
 	$("#blogSubmit").click(function(){
-		console.log("BLOG SUBMIT");
-		document.getElementById('emailAddressId').value=sessionStorage.EMAIL;
+		var theStuff =  CKEDITOR.instances['blogText'].getData();
+		console.log("BLOG SUBMIT:"+theStuff);
+		$.post('http://www.zenredcomputinglocal.com:8080/blogPost.html',  
+			{'emailAddress': sessionStorage.EMAIL, 'category': sessionStorage.CATEGORY, 'editor1': theStuff},
+			function(resultData){
+				console.log("RESULT DATA:"+resultData);
+			})
+			;
+			return false;
 	});
 	
 	$("#johntredden").click(function(){
@@ -447,6 +454,7 @@ var blogRequest = (function () {
 	return{
 		jsonCall: function(category){
 			console.log("blog request:"+category);
+			sessionStorage.setItem('CATEGORY', category);
 			var email = sessionStorage.EMAIL;
 			console.log("click EMAIL:"+email);
 			$.getJSON("http://www.zenredcomputinglocal.com:8080/generalTopic.html?subject="
@@ -510,9 +518,9 @@ var blogRequest = (function () {
 <section id="addBlog">
 <div id="#blogContent">
 
-<form action="http://www.zenredcomputinglocal.com:8080/blogPost.html" method="post" id="blogForm">
+<form id="blogForm">
 <textarea class="ckeditor" name="editor1" id="blogText">
-                This is my textarea to be replaced with CKEditor.
+                
 </textarea>
 
 <input type="submit" value="Submit" id="blogSubmit" />

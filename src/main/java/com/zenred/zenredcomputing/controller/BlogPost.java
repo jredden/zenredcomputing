@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
+import com.zenred.zenredcomputing.domain.PostsDAO;
+
 
 public class BlogPost implements Controller {
 
@@ -25,6 +27,9 @@ public class BlogPost implements Controller {
 		String emailAddress = BlogPost.parseControlField(editString, "From:", "</p>");
 		String subject = BlogPost.parseControlField(editString, "Subject:", "</p>");
 		String content = BlogPost.parseControlField(editString, "Entry:", editString.length());
+		String title = BlogPost.parseControlField(editString, "Title:", "</p>");
+		PostsDAO postsDAO = new PostsDAO();
+		postsDAO.addPost(content, title, emailAddress, subject);
 		
 		return null;
 	}
