@@ -55,6 +55,8 @@ public class  DateOperation <Obj>{
 	 * listOne and listTwo are already assumed to be in sorted order
 	 * from newest to oldest
 	 * 
+	 * listOne is owned by use and designates state true on merge.
+	 * 
 	 * @param listOne
 	 j @return
 	 */

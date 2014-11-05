@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-@XStreamAlias("TopicRespone")
+@XStreamAlias("TopicResponse")
 public class GeneralTopicResponse {
 
 	private List<VisualizationCentricPostsResponse> visualizationCentricPosts;

@@ -17,6 +17,16 @@ public class ParseControlTest {
 			"<p>and another line.</p>" +
 			"<p>and another.</p>";
 
+	private static String editString3 = "<p>From: johnredden@aol.com</p>"+"\n"+
+
+"<p>Subject: Computer History</p>"+"\n"+
+
+"<p>Title: Early Minicomputers</p>"+"\n"+
+
+"<p>Start Entry:</p>"+"\n"+
+
+"<p>An early mini-computer was the PDP-8.</p>";
+	
 	@Test
 	public void test() {
 		String answer1 = BlogPost.parseControlField(editString, "From:", "</p>");
@@ -35,5 +45,12 @@ public class ParseControlTest {
 		System.out.println("Answer2:"+answer2);
 		String answer3 = BlogPost.parseControlField(editString2, "Entry:", editString2.length());
 		System.out.println("Answer3:"+answer3);
+	}
+	
+	@Test
+	public void test3(){
+		String answer1 = BlogPost.parseControlField(editString3, "From:", "</p>");
+		System.out.println("Answer1:"+answer1);
+
 	}
 }

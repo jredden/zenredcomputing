@@ -53,5 +53,16 @@ public class PostsDAOTest {
 */		
 		
 	}
+	
+	/*
+	 * Here_000:<p>From: johnredden@aol.com</p>
+
+<p>Subject: Business Stories</p>
+
+<p>Title: Tran</p>
+
+<p>Start Entry: &nbsp;Kwock punched a hole.</p>
+::johnredden@aol.com:: Tran::Business Stories::
+	 */
 
 }

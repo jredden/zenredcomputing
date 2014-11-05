@@ -9,10 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import com.zenred.zenredcomputing.controller.json.GeneralTopicView;
-import com.zenred.zenredcomputing.domain.DateOperation;
-import com.zenred.zenredcomputing.domain.DomainTransfer;
-import com.zenred.zenredcomputing.domain.Posts;
 import com.zenred.zenredcomputing.domain.PostsDAO;
+import com.zenred.zenredcomputing.vizualization.DomainTransferOperation;
 import com.zenred.zenredcomputing.vizualization.GeneralTopicResponse;
 import com.zenred.zenredcomputing.vizualization.VisualizationCentricPostsResponse;
 
@@ -24,15 +22,14 @@ public class GeneralTopic implements Controller {
 		String emailAddress = request.getParameter("emailAddress");
 		String subject = request.getParameter("subject");
 		PostsDAO postsDAO = new PostsDAO();
-		List<Posts> notUsersPosts = postsDAO.readNonUserPostsWithinSubject(emailAddress, subject);
-		List<Posts> usersPosts = postsDAO.readUserPostsWithinSubject(emailAddress, subject);
-		DateOperation<Posts> dateOperation = new DateOperation<Posts>();
-		List<Posts> combinedList = dateOperation.combineLists(notUsersPosts,
-				usersPosts);
+		List<VisualizationCentricPostsResponse> listVisualizationCentricPostsResponses = DomainTransferOperation
+				.operation(postsDAO, emailAddress, subject);
 		GeneralTopicResponse generalTopicResponse = new GeneralTopicResponse();
-		generalTopicResponse.setVisualizationCentricPosts(DomainTransfer.postsToPostsResponse(combinedList, subject));
+		generalTopicResponse
+				.setVisualizationCentricPosts(listVisualizationCentricPostsResponses);
 		ModelAndView modelAndView = new ModelAndView(new GeneralTopicView());
-		modelAndView.addObject(GeneralTopicView.JSON_ROOT, generalTopicResponse);
+		modelAndView
+				.addObject(GeneralTopicView.JSON_ROOT, generalTopicResponse);
 		return modelAndView;
 	}
 

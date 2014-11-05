@@ -28,7 +28,8 @@ public class SubjectsDAOTest {
 		} catch (AlreadyAssociated ae) {
 			ae.printStackTrace();
 		}
-		status = true;  // made it out of dodge alive
+		
+		status = subjectsDAO.isUserAssociatedToSubject("Business Stories", "johnredden@aol.com");
 		assertTrue(status);
 		status = false;
 		try {
