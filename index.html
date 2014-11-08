@@ -55,6 +55,9 @@ var tagOperations = (function(){
 	   				},
 		   			function blogForm(){
 		   				$('#blogForm').show();
+	   				},	   			
+		   			function blogUrls(){
+	   					$('#blogUrls').show();
 	   				}	
 	];
 	var hideOperations = [
@@ -91,6 +94,9 @@ var tagOperations = (function(){
 	   			},
 	   			function blogForm(){
 	   				$('#blogForm').hide();
+	   			},	   			
+	   			function blogUrls(){
+	   				$('#blogUrls').hide();
 	   			}	   			
 				
 	];
@@ -106,7 +112,8 @@ var tagOperations = (function(){
 			"createLogin" :7,
 			"blogSect" :8,
 			"blogContent" :9,
-			"blogForm" :10
+			"blogForm" :10,
+			"blogUrls" :11
 	};
 	
 	// public 
@@ -249,7 +256,7 @@ $(document).ready(function() {
 	$(center2).fadeOut(7000);
 	$(centerZR).fadeIn();
 	$(centerZR).fadeOut(9000);
-	
+	$('#page').hide();
 	// CLICK event handlers
 	// each has a list of show and hide operations that make elements appear and disappear
 	// on the page.
@@ -261,7 +268,7 @@ $(document).ready(function() {
 	$("#resume").click(function () { 
 		console.log("in resume");
 		var showList = ['resumeSect'];
-		var hideList = ['johntreddenSect','openSourceSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin', 'blogSect', 'blogForm'];
+		var hideList = ['johntreddenSect','openSourceSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin', 'blogSect', 'blogForm', 'blogUrls'];
 		tagOperations.both(showList, hideList);
 	});
 	
@@ -282,7 +289,7 @@ $(document).ready(function() {
 	$("#openSource").click(function () {
 		console.log("in openSource"); 
 		var showList = ['openSourceSect'];
-		var hideList = ['johntreddenSect','resumeSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin', 'blogSect','blogForm'];
+		var hideList = ['johntreddenSect','resumeSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin', 'blogSect','blogForm', 'blogUrls'];
 		tagOperations.both(showList, hideList);
 
 	});
@@ -309,7 +316,7 @@ $(document).ready(function() {
 			+"<p/>Title:</p>"
 			+'Start Entry:');
 		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#C9C9C9');
-		var showList = ['blogForm'];
+		var showList = ['blogForm', 'blogUrls'];
 		tagOperations.show(showList);
 		blogRequest.jsonCall("Computer History");
 	});
@@ -321,7 +328,7 @@ $(document).ready(function() {
 			+"<p/>Title:</p>"
 			+'Start Entry:');
 		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#D4D4D4');
-		var showList = ['blogForm'];
+		var showList = ['blogForm', 'blogUrls'];
 		tagOperations.show(showList);
 		blogRequest.jsonCall("Computer Languages");
 	});
@@ -333,7 +340,7 @@ $(document).ready(function() {
 			+"<p/>Title:</p>"
 			+'Start Entry:');
 		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#DBDBDB');
-		var showList = ['blogForm'];
+		var showList = ['blogForm', 'blogUrls'];
 		tagOperations.show(showList);
 		blogRequest.jsonCall("Inclusive Software Engineering");
 	});
@@ -345,7 +352,7 @@ $(document).ready(function() {
 			+"<p/>Title:</p>"
 			+'Start Entry:');
 		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#E0E0E0');
-		var showList = ['blogForm'];
+		var showList = ['blogForm', 'blogUrls'];
 		tagOperations.show(showList);
 		blogRequest.jsonCall("Business Stories");
 	});
@@ -517,7 +524,6 @@ var blogRequest = (function () {
 
 <section id="addBlog">
 <div id="#blogContent">
-
 <form id="blogForm" class="blog">
 <textarea class="ckeditor" name="editor1" id="blogText">
                 
@@ -525,7 +531,7 @@ var blogRequest = (function () {
 
 <input type="submit" value="Submit" id="blogSubmit" />
 </form>
-
+<div id="blogUrls" class="containingbox"></div>
 </div>
 </section>
 
