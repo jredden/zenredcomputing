@@ -97,8 +97,7 @@ var tagOperations = (function(){
 	   			},	   			
 	   			function blogUrls(){
 	   				$('#blogUrls').hide();
-	   			}	   			
-				
+	   			}
 	];
 
 	var references = {
@@ -256,7 +255,7 @@ $(document).ready(function() {
 	$(center2).fadeOut(7000);
 	$(centerZR).fadeIn();
 	$(centerZR).fadeOut(9000);
-	$('#page').hide();
+
 	// CLICK event handlers
 	// each has a list of show and hide operations that make elements appear and disappear
 	// on the page.
@@ -316,6 +315,7 @@ $(document).ready(function() {
 			+"<p/>Title:</p>"
 			+'Start Entry:');
 		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#C9C9C9');
+		$('#page').hide();
 		var showList = ['blogForm', 'blogUrls'];
 		tagOperations.show(showList);
 		blogRequest.jsonCall("Computer History");
@@ -328,6 +328,7 @@ $(document).ready(function() {
 			+"<p/>Title:</p>"
 			+'Start Entry:');
 		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#D4D4D4');
+		$('#page').hide();
 		var showList = ['blogForm', 'blogUrls'];
 		tagOperations.show(showList);
 		blogRequest.jsonCall("Computer Languages");
@@ -340,6 +341,7 @@ $(document).ready(function() {
 			+"<p/>Title:</p>"
 			+'Start Entry:');
 		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#DBDBDB');
+		$('#page').hide();
 		var showList = ['blogForm', 'blogUrls'];
 		tagOperations.show(showList);
 		blogRequest.jsonCall("Inclusive Software Engineering");
@@ -352,6 +354,7 @@ $(document).ready(function() {
 			+"<p/>Title:</p>"
 			+'Start Entry:');
 		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#E0E0E0');
+		$('#page').hide();
 		var showList = ['blogForm', 'blogUrls'];
 		tagOperations.show(showList);
 		blogRequest.jsonCall("Business Stories");
