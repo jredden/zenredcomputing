@@ -367,6 +367,11 @@ $(document).ready(function() {
 			{'emailAddress': sessionStorage.EMAIL, 'category': sessionStorage.CATEGORY, 'editor1': theStuff},
 			function(resultData){
 				console.log("RESULT DATA:"+resultData);
+				var ick = resultData.replace('com.zenred.zenredcomputing.vizualization.VisualizationCentricPostsResponse', 'zenred');
+				var posts = JSON.parse(ick);
+				var object = posts.TopicResponse.visualizationCentricPosts.zenred;
+				console.log("POSTS:"+object.toString());
+				console.log("LENGTH:"+object.length);
 			})
 			;
 			return false;

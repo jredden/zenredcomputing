@@ -22,6 +22,7 @@ public class DomainTransfer {
 			visualizationCentricPostsResponse.setOwnedByUser(posts.getState().equals("true")? true: false);
 			visualizationCentricPostsResponse.setSubject(subject);
 			visualizationCentricPostsResponse.setTitle(posts.getTitle());
+			visualizationCentricPostsResponse.setId(posts.getPosts_id());
 			visualizationCentricPostsResponses.add(visualizationCentricPostsResponse);
 		}
 		return visualizationCentricPostsResponses;

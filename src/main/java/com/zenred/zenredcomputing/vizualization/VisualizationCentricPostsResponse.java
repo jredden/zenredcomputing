@@ -8,6 +8,8 @@ public class VisualizationCentricPostsResponse {
 	private String Subject;
 	private String Title;
 	private String Content;
+	private int Id;
+	
 	public boolean isOwnedByUser() {
 		return ownedByUser;
 	}
@@ -39,11 +41,17 @@ public class VisualizationCentricPostsResponse {
 		Content = content;
 	}
 	
+	public int getId() {
+		return Id;
+	}
+	public void setId(int id) {
+		Id = id;
+	}
 	@Override
 	public String toString() {
-		return "VisualizationCentricPosts [ownedByUser=" + ownedByUser
+		return "VisualizationCentricPostsResponse [ownedByUser=" + ownedByUser
 				+ ", order=" + order + ", Subject=" + Subject + ", Title="
-				+ Title + ", Content=" + Content + "]";
+				+ Title + ", Content=" + Content + ", Id=" + Id + "]";
 	}
 
 
