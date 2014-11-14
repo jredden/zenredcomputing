@@ -5,6 +5,7 @@ public class VisualizationCentricPostsResponse {
 	
 	private boolean ownedByUser;
 	private int order;
+	private String emailAddress;
 	private String Subject;
 	private String Title;
 	private String Content;
@@ -41,6 +42,12 @@ public class VisualizationCentricPostsResponse {
 		Content = content;
 	}
 	
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
 	public int getId() {
 		return Id;
 	}
@@ -50,8 +57,9 @@ public class VisualizationCentricPostsResponse {
 	@Override
 	public String toString() {
 		return "VisualizationCentricPostsResponse [ownedByUser=" + ownedByUser
-				+ ", order=" + order + ", Subject=" + Subject + ", Title="
-				+ Title + ", Content=" + Content + ", Id=" + Id + "]";
+				+ ", order=" + order + ", emailAddress=" + emailAddress
+				+ ", Subject=" + Subject + ", Title=" + Title + ", Content="
+				+ Content + ", Id=" + Id + "]";
 	}
 
 

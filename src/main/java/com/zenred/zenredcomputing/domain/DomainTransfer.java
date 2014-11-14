@@ -13,7 +13,7 @@ public class DomainTransfer {
 	 * @param postsList
 	 * @return
 	 */
-	public static List<VisualizationCentricPostsResponse> postsToPostsResponse(List<Posts> postsList, String subject){
+	public static List<VisualizationCentricPostsResponse> postsToPostsResponse(List<Posts> postsList, String subject, String emailAddress){
 		List<VisualizationCentricPostsResponse> visualizationCentricPostsResponses = new ArrayList<VisualizationCentricPostsResponse>();
 		for(Posts posts: postsList){
 			VisualizationCentricPostsResponse visualizationCentricPostsResponse = new VisualizationCentricPostsResponse();
@@ -23,6 +23,7 @@ public class DomainTransfer {
 			visualizationCentricPostsResponse.setSubject(subject);
 			visualizationCentricPostsResponse.setTitle(posts.getTitle());
 			visualizationCentricPostsResponse.setId(posts.getPosts_id());
+			visualizationCentricPostsResponse.setEmailAddress(emailAddress);
 			visualizationCentricPostsResponses.add(visualizationCentricPostsResponse);
 		}
 		return visualizationCentricPostsResponses;

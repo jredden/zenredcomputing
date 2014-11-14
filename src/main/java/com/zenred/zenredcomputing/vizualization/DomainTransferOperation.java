@@ -20,7 +20,7 @@ public class DomainTransferOperation {
 				usersPosts);
 
 		List<VisualizationCentricPostsResponse> listVisualizationCentricPostsResponses = DomainTransfer
-				.postsToPostsResponse(combinedList, subject);
+				.postsToPostsResponse(combinedList, subject, emailAddress);
 
 		return listVisualizationCentricPostsResponses;
 	}

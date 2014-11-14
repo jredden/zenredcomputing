@@ -26,7 +26,11 @@ body{
 	position: relative;
     left: 855px;
 }
-
+#blogUrls2 {
+    position: absolute;
+    left: 865px;
+    top: 140px;
+}
 
 #page{
 	width: 1100px;

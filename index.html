@@ -14,12 +14,10 @@ ScienceFictionSoftware,
 <script src="ckeditor/ckeditor.js" type="text/javascript"></script>
 <script src="ckeditor/adapters/jquery.js" type="text/javascript"></script>
 <script type="text/javascript" >
-
 //global  (refactor later)
 var questionNumber = '0';
 var addQuestion = '0+0';
 var formData = { questionNumber1:questionNumber, questionNumber2:addQuestion, questionNumber3:'0+0' }
-
 var tagOperations = (function(){
 	// private
 	var showOperations = [
@@ -99,7 +97,6 @@ var tagOperations = (function(){
 	   				$('#blogUrls').hide();
 	   			}
 	];
-
 	var references = {
 			"johntreddenSect" : 0,
 			"resumeSect" : 1,
@@ -145,16 +142,12 @@ var tagOperations = (function(){
 		
 	}
 }());
-
-
 $(document).ready(function() {
 	console.log("in ready");
-
 	$( 'textarea#editor1' ).ckeditor();
  
 	tagOperations.hideAll();
 	$('#blogContent').hide();
-
 	// LoginFormId
 	$('#LoginFormID').ajaxForm({ 
 		dataType:  'json', 
@@ -199,7 +192,6 @@ $(document).ready(function() {
   				}
 		}
 	});
-
 	// json processor for CreateLoginFormId
 	function processCreateLoginJson(json) {
 		console.log("createLogin:"+json.createMessageResponse.emailAddress);
@@ -214,7 +206,6 @@ $(document).ready(function() {
 			alert("There is an error in what you typed:"+json.createMessageResponse.theMessage);
 		}
 	}
-
 	// Question1FormID is associated to a challange similar to captcha 
 	// 					except questions are asked
 	$('#Question1FormID').ajaxForm({ 
@@ -255,7 +246,6 @@ $(document).ready(function() {
 	$(center2).fadeOut(7000);
 	$(centerZR).fadeIn();
 	$(centerZR).fadeOut(9000);
-
 	// CLICK event handlers
 	// each has a list of show and hide operations that make elements appear and disappear
 	// on the page.
@@ -263,7 +253,6 @@ $(document).ready(function() {
 	$("#home").click(function () { 
 		tagOperations.hideAll();
 	});	
-
 	$("#resume").click(function () { 
 		console.log("in resume");
 		var showList = ['resumeSect'];
@@ -290,7 +279,6 @@ $(document).ready(function() {
 		var showList = ['openSourceSect'];
 		var hideList = ['johntreddenSect','resumeSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin', 'blogSect','blogForm', 'blogUrls'];
 		tagOperations.both(showList, hideList);
-
 	});
 	
 	$("#startLogin").click(function(){
@@ -304,7 +292,6 @@ $(document).ready(function() {
 		tagOperations.hide(hideList);
 		accessRequest.jsonCall();
 	});
-
 	
 	$("#Computer_History").click(function(){
 		console.log("Computer History");
@@ -372,6 +359,13 @@ $(document).ready(function() {
 				var object = posts.TopicResponse.visualizationCentricPosts.zenred;
 				console.log("POSTS:"+object.toString());
 				console.log("LENGTH:"+object.length);
+								var htmlStuff = "";
+				for (var idex = 0; idex < object.length; idex++) {
+					htmlStuff +="<p><a href=\"#readEntry?Id="+object[idex]['Id']+"\">"+object[idex]['Title']+ "&nbsp"+object[idex]['emailAddress']+"</p>";
+				}
+				console.log("HTML_STUFF:"+htmlStuff);
+				$(blogUrls2).html(htmlStuff);
+				
 			})
 			;
 			return false;
@@ -381,8 +375,6 @@ $(document).ready(function() {
 		window.location = "http://www.johntredden.com";
 	});
 });
-
-
 // invoke accessRequest endpoint associated to startLogin event
 var accessRequest = (function () {
 	return{
@@ -397,7 +389,6 @@ var accessRequest = (function () {
 		}
 	}
 })();
-
 // json processor for accessRequest
 // 		it builds dynamic HTML using data returned from the server and asks questions
 var processRequest = (function () {
@@ -427,7 +418,6 @@ var processRequest = (function () {
 		}
 	}
 })();
-
 // sets up server endpoint invocation for blog categories
 var seeCat0 = (function () {
 	return{
@@ -442,7 +432,6 @@ var seeCat0 = (function () {
 		}
 	}
 })();
-
 // json processor for seeCat0
 // activates blog catagory controls
 var jsonCategory = (function () {
@@ -462,7 +451,6 @@ var jsonCategory = (function () {
 		}
 	}
 })();
-
 // called by category event handlers
 // 	invokes end point processor for selectemailAddressIded category
 var blogRequest = (function () {
@@ -483,9 +471,6 @@ var blogRequest = (function () {
 		}
 	}
 })();
-
-
-
 </script>
 
 <title>Zenred Computings Web Site</title>
@@ -541,6 +526,7 @@ var blogRequest = (function () {
 </form>
 <div id="blogUrls" class="containingbox"></div>
 </div>
+<div id="blogUrls2"></div>
 </section>
 
 <section id="login_op">
