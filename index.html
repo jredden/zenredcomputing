@@ -13,6 +13,7 @@ ScienceFictionSoftware,
 <script type="text/javascript" src="../js/jquery.form.js"></script>
 <script src="ckeditor/ckeditor.js" type="text/javascript"></script>
 <script src="ckeditor/adapters/jquery.js" type="text/javascript"></script>
+<script src="js/jPages.js"></script>"
 <script type="text/javascript" >
 //global  (refactor later)
 var questionNumber = '0';
@@ -56,6 +57,9 @@ var tagOperations = (function(){
 	   				},	   			
 		   			function blogUrls(){
 	   					$('#blogUrls').show();
+	   				},	   			
+		   			function blogUrls2(){
+	   					$('#blogUrls2').show();
 	   				}	
 	];
 	var hideOperations = [
@@ -95,6 +99,9 @@ var tagOperations = (function(){
 	   			},	   			
 	   			function blogUrls(){
 	   				$('#blogUrls').hide();
+	   			},	   			
+	   			function blogUrls2(){
+	   				$('#blogUrls2').hide();
 	   			}
 	];
 	var references = {
@@ -109,7 +116,8 @@ var tagOperations = (function(){
 			"blogSect" :8,
 			"blogContent" :9,
 			"blogForm" :10,
-			"blogUrls" :11
+			"blogUrls" :11,
+			"blogUrls" :12
 	};
 	
 	// public 
@@ -361,11 +369,15 @@ $(document).ready(function() {
 				console.log("LENGTH:"+object.length);
 								var htmlStuff = "";
 				for (var idex = 0; idex < object.length; idex++) {
-					htmlStuff +="<p><a href=\"#readEntry?Id="+object[idex]['Id']+"\">"+object[idex]['Title']+ "&nbsp"+object[idex]['emailAddress']+"</p>";
+					htmlStuff +="<p><a href=\"#readEntry?Id="+object[idex]['Id']+"\">"+object[idex]['Title']+ "</a></p><p>"+object[idex]['emailAddress']+"</p>";
 				}
+//				htmlStuff += "<input type=\"text\" value=\"1\" > ";
+//				htmlStuff += "<button id=\"pageButton \">jump to this page</button>";
 				console.log("HTML_STUFF:"+htmlStuff);
 				$(blogUrls2).html(htmlStuff);
-				
+				$("div.holder").jPages({
+			        containerID : "blogUrls2"
+			    });
 			})
 			;
 			return false;
@@ -374,6 +386,15 @@ $(document).ready(function() {
 	$("#johntredden").click(function(){
 		window.location = "http://www.johntredden.com";
 	});
+
+	/* when button is clicked */
+    $("pageButton").click(function(){
+        /* get given page */
+      var page = parseInt( $("input").val() );
+      /* jump to that page */
+      console.log("HOLDER:"+page);
+      $("div.holder").jPages( page );
+    });
 });
 // invoke accessRequest endpoint associated to startLogin event
 var accessRequest = (function () {
@@ -516,6 +537,8 @@ var blogRequest = (function () {
 </section>
 
 <section id="addBlog">
+<!-- navigation holder -->
+<div class="holder" id="holderId"></div>
 <div id="#blogContent">
 <form id="blogForm" class="blog">
 <textarea class="ckeditor" name="editor1" id="blogText">
@@ -526,7 +549,10 @@ var blogRequest = (function () {
 </form>
 <div id="blogUrls" class="containingbox"></div>
 </div>
-<div id="blogUrls2"></div>
+<div id="blogUrls2">
+
+
+</div>
 </section>
 
 <section id="login_op">
