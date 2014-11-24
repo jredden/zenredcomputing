@@ -375,16 +375,20 @@ $(document).ready(function() {
 				var ick = resultData.replace('com.zenred.zenredcomputing.vizualization.VisualizationCentricPostsResponse', 'zenred');
 				var posts = JSON.parse(ick);
 				var object = posts.TopicResponse.visualizationCentricPosts.zenred;
-				console.log("POSTS:"+object.toString());
+				
 				console.log("LENGTH:"+object.length);
-								var htmlStuff = "";
+				var htmlStuff = "";
+				theIndex = [];
 				for (var idex = 0; idex < object.length; idex++) {
-					htmlStuff +="<p><a href=\"#readEntry?Id="+object[idex]['Id']+"\">"+object[idex]['Title']+ "</a></p><p>"+object[idex]['emailAddress']+"</p>";
+					idex2 = idex;
+					theIndex[idex] = "" + object[idex]['Id'];
+					console.log("theIndex:"+theIndex[idex2]);
+					htmlStuff +="<p><a href=\"javascript:alert("+theIndex[idex2]+")\">"+object[idex]['Title']+ "</a></p><p>"+object[idex]['emailAddress']+"</p>";
+					console.log("HTML_STUFF:"+htmlStuff);
+					$(blogUrls2).html(htmlStuff);
 				}
 //				htmlStuff += "<input type=\"text\" value=\"1\" > ";
 //				htmlStuff += "<button id=\"pageButton \">jump to this page</button>";
-				console.log("HTML_STUFF:"+htmlStuff);
-				$(blogUrls2).html(htmlStuff);
 				$("div.holder").jPages({
 			        containerID : "blogUrls2"
 			    });
@@ -625,7 +629,7 @@ var blogRequest = (function () {
 <section id="createLoginSec">		
 			<div id="createLogin">
 				<form name="CreateLoginForm"  id="CreateLoginFormID"
-					action="http://www.zenredcomputing.com:8080/createLogin.html"
+					action="http://www.zenredcomputinglocal.com:8080/createLogin.html"
 					method="get">
 					<div id="firstName">
 						Your First Name: <span id="fn1"> <input type="text" 

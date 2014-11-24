@@ -26,6 +26,7 @@ public class CreateLogin implements Controller, StateIF {
 			HttpServletResponse response) throws Exception {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
+		System.out.println("CREATING_LOGIN:"+request.getParameter("email"));
 		String emailAddress = request.getParameter("email");
 		String password1 = request.getParameter("Password1");
 		String password2 = request.getParameter("Password2");
@@ -51,6 +52,7 @@ public class CreateLogin implements Controller, StateIF {
 		user.setPassword(password1);
 		user.setUser_Status(UserStatus.registered);
 		UserDao userDao = new UserDao();
+		System.out.println("CREATING_USER:"+user);
 		userDao.createUser(user);
 		createLoginResponse.setTheMessage("SUCCESS");
 		createLoginResponse.setEmailAddress(emailAddress);
