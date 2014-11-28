@@ -28,4 +28,20 @@ public class DomainTransfer {
 		}
 		return visualizationCentricPostsResponses;
 	}
+	
+	/**
+	 * 
+	 * @param post
+	 * @return visualized post
+	 */
+	public static VisualizationCentricPostsResponse postToPostResponse(Posts post){
+		VisualizationCentricPostsResponse visualizationCentricPostsResponse = new VisualizationCentricPostsResponse();
+		visualizationCentricPostsResponse.setContent(post.getContent());
+		visualizationCentricPostsResponse.setOrder(post.getPosts_id());
+		visualizationCentricPostsResponse.setOwnedByUser(true);
+		// visualizationCentricPostsResponse.setSubject(post.get);
+		visualizationCentricPostsResponse.setTitle(post.getTitle());
+		visualizationCentricPostsResponse.setId(post.getPosts_id());
+		return visualizationCentricPostsResponse;
+	}
 }

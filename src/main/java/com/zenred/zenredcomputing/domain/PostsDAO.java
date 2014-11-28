@@ -59,7 +59,9 @@ public class PostsDAO extends AbstractJDBCDao {
 			+" WHERE uts.Subjects_id = stp.Subjects_id AND utp.User_id != ? "
 			+" AND stp.Subjects_id = ? ORDER BY po.Datestamp"
 			;
-
+	private String readPostById = "SELECT po.Title, po.Content, po.Datestamp, po.Posts_id FROM "
+			+ tableName + " po WHERE po.Posts_id = ?"
+			;
 	
 	public class NoSubjectChoosen extends Exception {
 
@@ -269,5 +271,25 @@ public class PostsDAO extends AbstractJDBCDao {
 			postsList.add(posts);
 		}
 		return postsList;
+	}
+	
+	/**
+	 * 
+	 * @param Posts Id
+	 * @return Posts
+	 */
+	public Posts readPostById(String Id) {
+		Posts posts = new Posts();
+		Integer i_Id = Integer.getInteger(Id);
+		Object[] param = { Id };
+		Map<String, Object> postsMap = null;
+		postsMap = super.jdbcSetUp().getSimpleJdbcTemplate()
+				.queryForMap(readPostById, param);
+		posts.setContent((String) postsMap.get("Content").toString());
+		posts.setTitle((String) postsMap.get("Title").toString());
+		posts.setDatestamp((String) postsMap.get("Datestamp").toString());
+		String s_setPosts_id = (String) postsMap.get("Posts_id").toString();
+		posts.setPosts_id(new Integer(s_setPosts_id).intValue());		
+		return posts;
 	}
 }

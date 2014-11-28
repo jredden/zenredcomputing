@@ -20,6 +20,7 @@
 	<bean id="category" class="com.zenred.zenredcomputing.controller.Category"/>
 	<bean id="generalTopic" class="com.zenred.zenredcomputing.controller.GeneralTopic"/>
 	<bean id="blogPost" class="com.zenred.zenredcomputing.controller.BlogPost"/>
+	<bean id="readPostById" class="com.zenred.zenredcomputing.controller.ReadPostById"/>
 	
 	<bean id="urlMapping"
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -32,6 +33,7 @@
 				<prop key="/category.html">category</prop>
 				<prop key="/generalTopic.html">generalTopic</prop>
 				<prop key="/blogPost.html">blogPost</prop>
+				<prop key="/readPostById.html">readPostById</prop>
 			</props>
 		</property>
 	</bean>

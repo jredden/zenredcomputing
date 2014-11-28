@@ -383,7 +383,7 @@ $(document).ready(function() {
 					idex2 = idex;
 					theIndex[idex] = "" + object[idex]['Id'];
 					console.log("theIndex:"+theIndex[idex2]);
-					htmlStuff +="<p><a href=\"javascript:alert("+theIndex[idex2]+")\">"+object[idex]['Title']+ "</a></p><p>"+object[idex]['emailAddress']+"</p>";
+					htmlStuff +="<p><a href=\"javascript:readBlog.readBlogById("+theIndex[idex2]+")\">"+object[idex]['Title']+ "</a></p><p>"+object[idex]['emailAddress']+"</p>";
 					console.log("HTML_STUFF:"+htmlStuff);
 					$(blogUrls2).html(htmlStuff);
 				}
@@ -506,6 +506,42 @@ var blogRequest = (function () {
 		}
 	}
 })();
+
+// ivoked to read an existing blog entry
+var readBlog = (function (){
+	return{
+		readBlogById: function(Id){
+			// alert(Id);
+			$.post("http://www.zenredcomputinglocal.com:8080/readPostById.html",
+					{PostId: Id}, function (post, status){
+						var posts = $.parseJSON(post);
+						console.log("POSTS:"+posts['PostResponse']['visualizationCentricPostsResponse']['Content']);
+						var status = posts['PostResponse']['status'];
+						if(status.indexOf("success") != -1){
+							CKEDITOR.instances['blogText'].setData(posts['PostResponse']['visualizationCentricPostsResponse']['Content']);
+						}
+						else{
+							alert("Internal error occured while reading post.");
+						}
+					}
+			);
+		}
+	}
+})();
+
+function print_recursive(printthis) {
+    var output = '';
+
+    if($.isArray(printthis) || typeof(printthis) == 'object') {
+        for(var i in printthis) {
+        	console.log("??:"+printthis[i]+"::"+i);
+            output += i + ' : ' + print_r(printthis[i]) + '\n';
+        }
+    }else {
+        output += printthis;
+    }
+    console.log("PRINT:"+output);
+}
 </script>
 
 <title>Zenred Computings Web Site</title>
