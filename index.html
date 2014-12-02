@@ -385,7 +385,7 @@ $(document).ready(function() {
 					console.log("theIndex:"+theIndex[idex2]);
 					htmlStuff +="<p><a href=\"javascript:readBlog.readBlogById("+theIndex[idex2]+")\">"+object[idex]['Title']+ "</a></p><p>"+object[idex]['emailAddress']+"</p>";
 					console.log("HTML_STUFF:"+htmlStuff);
-					$(blogUrls2).html(htmlStuff);
+					$(blogUrls2 ).html(htmlStuff);
 				}
 //				htmlStuff += "<input type=\"text\" value=\"1\" > ";
 //				htmlStuff += "<button id=\"pageButton \">jump to this page</button>";
@@ -482,12 +482,12 @@ var jsonCategory = (function () {
 			$("#blogSect").show();
 		},
 		Category1: function(json){
-			console.log(json);
+			console.log('CATEGORY1:'+json);
 		}
 	}
 })();
 // called by category event handlers
-// 	invokes end point processor for selectemailAddressIded category
+// 	invokes end point processor for selected category
 var blogRequest = (function () {
 	return{
 		jsonCall: function(category){
@@ -500,6 +500,35 @@ var blogRequest = (function () {
 			+"&emailAddress="
 			+email,
 			function(json){
+				$.post('http://www.zenredcomputinglocal.com:8080/readPosts.html',
+						{'emailAddress': sessionStorage.EMAIL, 'category': sessionStorage.CATEGORY},
+						function(resultData){
+							console.log("RESULT DATA2:"+resultData);
+							var showList = ['holderId'];
+							tagOperations.show(showList);
+									
+							var ick = resultData.replace('com.zenred.zenredcomputing.vizualization.VisualizationCentricPostsResponse', 'zenred');
+							var posts = JSON.parse(ick);
+							var object = posts.TopicResponse.visualizationCentricPosts.zenred;
+							
+							console.log("LENGTH2:"+object.length);
+							var htmlStuff = "";
+							theIndex = [];
+							for (var idex = 0; idex < object.length; idex++) {
+								idex2 = idex;
+								theIndex[idex] = "" + object[idex]['Id'];
+								console.log("theIndex:"+theIndex[idex2]);
+								htmlStuff +="<p><a href=\"javascript:readBlog.readBlogById("+theIndex[idex2]+")\">"+object[idex]['Title']+ "</a></p><p>"+object[idex]['emailAddress']+"</p>";
+								console.log("HTML_STUFF2:"+htmlStuff);
+								$(blogUrls2 ).html(htmlStuff);
+							}
+//							htmlStuff += "<input type=\"text\" value=\"1\" > ";
+//							htmlStuff += "<button id=\"pageButton \">jump to this page</button>";
+							$("div.holder").jPages({
+						        containerID : "blogUrls2"
+						    });
+						})
+						;						
 				jsonCategory.Category1(json);
 				}		
 			);
