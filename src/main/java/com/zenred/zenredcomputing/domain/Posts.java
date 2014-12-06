@@ -5,6 +5,7 @@ public class Posts implements DateStampIF, StateIF{
 	private Integer Posts_id;
 	private String Title;
 	private String Content;
+	private String emailAddress;
 	private String Datestamp;
 	
 	private String state;
@@ -41,11 +42,17 @@ public class Posts implements DateStampIF, StateIF{
 		this.state = state;
 	}
 
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
 	@Override
 	public String toString() {
 		return "Posts [Posts_id=" + Posts_id + ", Title=" + Title
-				+ ", Content=" + Content + ", Datestamp=" + Datestamp
-				+ ", state=" + state + "]";
+				+ ", Content=" + Content + ", emailAddress=" + emailAddress
+				+ ", Datestamp=" + Datestamp + ", state=" + state + "]";
 	}
 	
 	

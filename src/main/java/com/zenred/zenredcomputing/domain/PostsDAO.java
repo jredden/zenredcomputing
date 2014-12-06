@@ -47,13 +47,15 @@ public class PostsDAO extends AbstractJDBCDao {
 			+ " utp ON po.Posts_id = utp.Posts_id "
 			+" WHERE utp.User_id != ?";
 
-	private String nonUserPostsWithinSubjectSql = "SELECT po.Title, po.Content, po.Datestamp, po.Posts_id FROM "
+	private String nonUserPostsWithinSubjectSql = "SELECT po.Title, po.Content, po.Datestamp, po.Posts_id, us.emailAddress  FROM "
 			+ tableName
 			+ " po INNER JOIN "
 			+ joinTableName
 			+ " utp ON po.Posts_id = utp.Posts_id JOIN "
 			+ joinTableName3 
 			+" uts ON uts.User_id = utp.User_id JOIN "
+			+ userTableName
+			+ " us ON uts.User_Id = us.User_Id JOIN "
 			+ joinTableName2
 			+ " stp ON po.Posts_id = stp.Posts_id "
 			+" WHERE uts.Subjects_id = stp.Subjects_id AND utp.User_id != ? "
@@ -266,6 +268,7 @@ public class PostsDAO extends AbstractJDBCDao {
 			posts.setContent((String) postsMap.get("Content").toString());
 			posts.setTitle((String) postsMap.get("Title").toString());
 			posts.setDatestamp((String) postsMap.get("Datestamp").toString());
+			posts.setEmailAddress((String) postsMap.get("emailAddress"));
 			String s_setPosts_id = (String) postsMap.get("Posts_id").toString();
 			posts.setPosts_id(new Integer(s_setPosts_id).intValue());
 			postsList.add(posts);

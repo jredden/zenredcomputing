@@ -23,7 +23,7 @@ public class DomainTransfer {
 			visualizationCentricPostsResponse.setSubject(subject);
 			visualizationCentricPostsResponse.setTitle(posts.getTitle());
 			visualizationCentricPostsResponse.setId(posts.getPosts_id());
-			visualizationCentricPostsResponse.setEmailAddress(emailAddress);
+			visualizationCentricPostsResponse.setEmailAddress(posts.getState().equals("true")? emailAddress : posts.getEmailAddress());
 			visualizationCentricPostsResponses.add(visualizationCentricPostsResponse);
 		}
 		return visualizationCentricPostsResponses;
