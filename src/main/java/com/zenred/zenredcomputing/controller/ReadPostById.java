@@ -23,6 +23,7 @@ public class ReadPostById implements Controller {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
 		String id = request.getParameter("PostId");
+		String category = request.getParameter("category");
 		System.out.println("POST_ID:"+id);
 		if(null == id){
 			PostResponse postResponse = new PostResponse();
@@ -33,7 +34,7 @@ public class ReadPostById implements Controller {
 		}
 		PostsDAO postsDAO = new PostsDAO();
 		Posts post = postsDAO.readPostById(id);
-		VisualizationCentricPostsResponse visualizationCentricPostsResponse = DomainTransfer.postToPostResponse(post);
+		VisualizationCentricPostsResponse visualizationCentricPostsResponse = DomainTransfer.postToPostResponse(post, category);
 		PostResponse postResponse = new PostResponse();
 		postResponse.setStatus("success");
 		postResponse.setVisualizationCentricPostsResponse(visualizationCentricPostsResponse);

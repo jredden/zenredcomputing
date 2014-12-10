@@ -518,7 +518,7 @@ var blogRequest = (function () {
 								idex2 = idex;
 								theIndex[idex] = "" + object[idex]['Id'];
 								console.log("theIndex:"+theIndex[idex2]);
-								htmlStuff +="<p><a href=\"javascript:readBlog.readBlogById("+theIndex[idex2]+")\">"+object[idex]['Title']+ "</a></p><p>"+object[idex]['emailAddress']+"</p>";
+								htmlStuff +="<p><a href=\"javascript:readBlog.readBlogById("+theIndex[idex2]+")\">"+object[idex]['Title']+ "</a></p><p>"+object[idex]['emailAddress']+"&nbsp;"+object[idex]['Stamp']+"</p>";
 								console.log("HTML_STUFF2:"+htmlStuff);
 								$(blogUrls2 ).html(htmlStuff);
 							}
@@ -542,12 +542,14 @@ var readBlog = (function (){
 		readBlogById: function(Id){
 			// alert(Id);
 			$.post("http://www.zenredcomputinglocal.com:8080/readPostById.html",
-					{PostId: Id}, function (post, status){
+					{PostId: Id, category: sessionStorage.CATEGORY }, function (post, status){
 						var posts = $.parseJSON(post);
 						console.log("POSTS:"+posts['PostResponse']['visualizationCentricPostsResponse']['Content']);
 						var status = posts['PostResponse']['status'];
 						if(status.indexOf("success") != -1){
+							var color = ckeditorAttributes.color(posts['PostResponse']['visualizationCentricPostsResponse']['Subject']);
 							CKEDITOR.instances['blogText'].setData(posts['PostResponse']['visualizationCentricPostsResponse']['Content']);
+							CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', color);
 						}
 						else{
 							alert("Internal error occured while reading post.");
@@ -558,6 +560,37 @@ var readBlog = (function (){
 	}
 })();
 
+// CKEDITOR display attributes.
+var ckeditorAttributes = (function (){
+
+	// private
+	
+	// Computer History   #C9C9C9
+	// Computer Languages #D4D4D4
+	// Inclusive Software Engineering  #DBDBDB
+	// Business_Stories   #E0E0E0
+	var colors = {
+			"Computer History" : "#C9C9C9",
+			"Computer Languages" : "#D4D4D4",
+			"Inclusive Software Engineering" : "#DBDBDB",
+			"Business_Stories" :  "#E0E0E0"
+	};
+
+	// public
+				
+	return{
+		color: function(subject){
+			var colorCode = colors[subject];
+			if(colorCode == null){
+				colorCode = "#E1E1E1";
+			}
+			console.log("COLOR:"+subject+"::"+colorCode);
+			return colorCode;	
+		}	
+	}
+})();
+
+// for debugging
 function print_recursive(printthis) {
     var output = '';
 

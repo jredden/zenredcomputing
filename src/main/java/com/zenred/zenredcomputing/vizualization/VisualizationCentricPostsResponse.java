@@ -9,6 +9,7 @@ public class VisualizationCentricPostsResponse {
 	private String Subject;
 	private String Title;
 	private String Content;
+	private String Stamp;
 	private int Id;
 	
 	public boolean isOwnedByUser() {
@@ -48,6 +49,12 @@ public class VisualizationCentricPostsResponse {
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
 	}
+	public String getStamp() {
+		return Stamp;
+	}
+	public void setStamp(String stamp) {
+		Stamp = stamp;
+	}
 	public int getId() {
 		return Id;
 	}
@@ -59,7 +66,7 @@ public class VisualizationCentricPostsResponse {
 		return "VisualizationCentricPostsResponse [ownedByUser=" + ownedByUser
 				+ ", order=" + order + ", emailAddress=" + emailAddress
 				+ ", Subject=" + Subject + ", Title=" + Title + ", Content="
-				+ Content + ", Id=" + Id + "]";
+				+ Content + ", Stamp=" + Stamp + ", Id=" + Id + "]";
 	}
 
 

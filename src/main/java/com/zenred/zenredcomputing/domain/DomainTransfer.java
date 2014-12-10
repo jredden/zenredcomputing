@@ -24,6 +24,7 @@ public class DomainTransfer {
 			visualizationCentricPostsResponse.setTitle(posts.getTitle());
 			visualizationCentricPostsResponse.setId(posts.getPosts_id());
 			visualizationCentricPostsResponse.setEmailAddress(posts.getState().equals("true")? emailAddress : posts.getEmailAddress());
+			visualizationCentricPostsResponse.setStamp(posts.getDatestamp());
 			visualizationCentricPostsResponses.add(visualizationCentricPostsResponse);
 		}
 		return visualizationCentricPostsResponses;
@@ -34,12 +35,12 @@ public class DomainTransfer {
 	 * @param post
 	 * @return visualized post
 	 */
-	public static VisualizationCentricPostsResponse postToPostResponse(Posts post){
+	public static VisualizationCentricPostsResponse postToPostResponse(Posts post, String subject){
 		VisualizationCentricPostsResponse visualizationCentricPostsResponse = new VisualizationCentricPostsResponse();
 		visualizationCentricPostsResponse.setContent(post.getContent());
 		visualizationCentricPostsResponse.setOrder(post.getPosts_id());
 		visualizationCentricPostsResponse.setOwnedByUser(true);
-		// visualizationCentricPostsResponse.setSubject(post.get);
+		visualizationCentricPostsResponse.setSubject(subject);
 		visualizationCentricPostsResponse.setTitle(post.getTitle());
 		visualizationCentricPostsResponse.setId(post.getPosts_id());
 		return visualizationCentricPostsResponse;
