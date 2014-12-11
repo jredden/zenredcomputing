@@ -118,7 +118,7 @@ public class SubjectsDAO extends AbstractJDBCDao {
 	@Transactional
 	public Boolean isUserAssociatedToSubject(String subject, String usersEMail){
 		Boolean alreadyAssociated = true;
-		
+		System.out.println("SUBJECT:"+subject);
 		Integer subjectsId = super.jdbcSetUp().getSimpleJdbcTemplate()
 				.queryForInt(subjectIndexSql,subject);
 		Integer userId = super.jdbcSetUp().getSimpleJdbcTemplate()
