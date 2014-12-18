@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="keywords" content=" 
-ScienceFictionSoftware, 
-",
-"Zenred Computing" />
+<meta name="keywords" content="<meta name="keywords" content="Techical BLog,Blog Software,Resume,Ciriculum Vitae,Zenred Computing,GIT residing Open Source" />
+
  
 <link href="css/main.css" rel="stylesheet" type="text/css">
 
@@ -15,10 +13,30 @@ ScienceFictionSoftware,
 <script src="ckeditor/adapters/jquery.js" type="text/javascript"></script>
 <script src="js/jPages.js"></script>"
 <script type="text/javascript" >
-//global  (refactor later)
-var questionNumber = '0';
-var addQuestion = '0+0';
-var formData = { questionNumber1:questionNumber, questionNumber2:addQuestion, questionNumber3:'0+0' }
+
+
+var questionOperations = (function(){
+	// private
+	var questionNumber = '0';
+	var addQuestion = '0+0';
+	var formData = { questionNumber1:questionNumber, questionNumber2:addQuestion}
+	
+	// public 
+	return {
+		setQuestionNumber: function(question){
+			questionNumber = question;
+			formData.questionNumber1 = questionNumber;
+		},
+		setAddQuestion: function(question){
+			addQuestion = question;
+			formData.questionNumber2 = addQuestion;
+		},
+		getFormData: function(){
+			return formData;
+		}
+	}
+}());
+
 var tagOperations = (function(){
 	// private
 	var showOperations = [
@@ -227,7 +245,7 @@ $(document).ready(function() {
 		dataType:  'json', 
 		type: "GET",
 		success:   processQuestion1Json,		
-		data: formData,
+		data: questionOperations.getFormData(),
 		error: function errorHandler(){
 			var out = '';
   			for (var p in this) {
@@ -445,9 +463,9 @@ var processRequest = (function () {
 			$(questions1).append("<br/>");
 			$(questions1).append("<div id=\"math\"> Please add these two numbers and key the answer in:&nbsp;&nbsp;  <span id=\"knum\">"+json.firstAccessResponse.secondQuestion+"</span></div>");
 			questionNumber = json.firstAccessResponse.questionNumber;
-			addQuestion = json.firstAccessResponse.secondQuestion;
-			formData.questionNumber1 = questionNumber;
-			formData.questionNumber2 = addQuestion;
+			questionOperations.setQuestionNumber(json.firstAccessResponse.questionNumber);
+			questionOperations.setAddQuestion(json.firstAccessResponse.secondQuestion);
+
 			var showList = ['questions1','answerQuestionOne'];
 			tagOperations.show(showList);
 		}
