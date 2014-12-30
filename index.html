@@ -37,6 +37,40 @@ var questionOperations = (function(){
 	}
 }());
 
+var ckeditorOperations = (function(){
+	// private
+	var backGroundColor = 'grey';
+	var instanceName = 'blogText'
+	var subject = undefined;
+	
+	// public
+	return{
+		setBackGroundColor: function(bgColor){
+			backGroundColor = bgColor;
+		},
+		setInstanceName: function(iName){
+			instanceName = iName;
+		},
+		setSubject: function(thisSubject){
+			subject = thisSubject;
+		},
+		buildEntry: function(){
+			CKEDITOR.instances[instanceName].setData('From: ' 
+					+ sessionStorage.EMAIL + "<p/>"
+					+'Subject: '
+					+ subject
+					+"<p/>Title:</p>"
+					+'Start Entry:');
+				CKEDITOR.instances[instanceName].document.getBody().setStyle('background-color', backGroundColor);
+				$('#page').hide();
+				var showList = ['blogForm', 'blogUrls'];
+				tagOperations.show(showList);
+				blogRequest.jsonCall(subject);
+	
+		}
+	}
+}());
+
 var tagOperations = (function(){
 	// private
 	var showOperations = [
@@ -327,57 +361,30 @@ $(document).ready(function() {
 	});
 	
 	$("#Computer_History").click(function(){
-		console.log("Computer History");
-		console.log(CKEDITOR.instances['blogText']);
-		CKEDITOR.instances['blogText'].setData('From: ' 
-			+ sessionStorage.EMAIL + "<p/>"
-			+'Subject: Computer History'
-			+"<p/>Title:</p>"
-			+'Start Entry:');
-		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#C9C9C9');
-		$('#page').hide();
-		var showList = ['blogForm', 'blogUrls'];
-		tagOperations.show(showList);
-		blogRequest.jsonCall("Computer History");
+		console.log("Computer History");	
+		ckeditorOperations.setBackGroundColor('#C9C9C9');
+		ckeditorOperations.setSubject('Computer History');
+		ckeditorOperations.buildEntry();
 	});
 	$("#Computer_Languages").click(function(){
 		console.log("Computer Languages");
-		CKEDITOR.instances['blogText'].setData('From: ' 
-			+ sessionStorage.EMAIL + "<p/>"
-			+'Subject: Computer Languages'
-			+"<p/>Title:</p>"
-			+'Start Entry:');
-		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#D4D4D4');
-		$('#page').hide();
-		var showList = ['blogForm', 'blogUrls'];
-		tagOperations.show(showList);
-		blogRequest.jsonCall("Computer Languages");
+		ckeditorOperations.setBackGroundColor('#D4D4D4');
+		ckeditorOperations.setSubject('Computer Languages');
+		ckeditorOperations.buildEntry();
+
 	});
 	$("#Inclusive_Software_Engineering").click(function(){
 		console.log("Inclusive Software Engineering");
-		CKEDITOR.instances['blogText'].setData('From: ' 
-			+ sessionStorage.EMAIL + "<p/>"
-			+'Subject: Inclusive Software Engineering'
-			+"<p/>Title:</p>"
-			+'Start Entry:');
-		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#DBDBDB');
-		$('#page').hide();
-		var showList = ['blogForm', 'blogUrls'];
-		tagOperations.show(showList);
-		blogRequest.jsonCall("Inclusive Software Engineering");
+		ckeditorOperations.setBackGroundColor('#DBDBDB');
+		ckeditorOperations.setSubject('Inclusive Software Engineering');
+		ckeditorOperations.buildEntry();	
 	});
 	$("#Business_Stories").click(function(){
 		console.log("Business Stories");
-		CKEDITOR.instances['blogText'].setData('From: ' 
-			+ sessionStorage.EMAIL + "<p/>"
-			+'Subject: Business Stories'
-			+"<p/>Title:</p>"
-			+'Start Entry:');
-		CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', '#E0E0E0');
-		$('#page').hide();
-		var showList = ['blogForm', 'blogUrls'];
-		tagOperations.show(showList);
-		blogRequest.jsonCall("Business Stories");
+		ckeditorOperations.setBackGroundColor('#DE0E0E0');
+		ckeditorOperations.setSubject('Business Stories');
+		ckeditorOperations.buildEntry();	
+
 	});
 	
 	$("#blogSubmit").click(function(){
