@@ -7,7 +7,7 @@
  
 <link href="css/main.css" rel="stylesheet" type="text/css">
 
-<script src="../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="../js/jquery-1.11.1.js" type="text/javascript"></script>
 <script type="text/javascript" src="../js/jquery.form.js"></script>
 <script src="ckeditor/ckeditor.js" type="text/javascript"></script>
 <script src="ckeditor/adapters/jquery.js" type="text/javascript"></script>
@@ -455,7 +455,7 @@ var processRequest = (function () {
 	return{
 		jsonProcess: function(json){
 			var colorSelector = 0;
-			$(questions1).html("<div id=\"questionHeader\"> Please prove you are a person.  Key in a four letter word that describes  </div> ");
+			$(questions1).html("<div id=\"questionHeader\"> Please prove you are a person by answering two questions.</div><br/><div><span id=\"q1\">First Question:</span>  Key in a four letter word that describes  </div> ");
 			$(questions1).append("<div id=\"questionHeader2\">the following set of phrases.  </div>   ");
 			$(questions1).append("<br/></div> ");
 			for (var idex = 0; idex < json.firstAccessResponse.questionList.string.length; idex++) {
@@ -468,7 +468,7 @@ var processRequest = (function () {
 				console.log("question:" + json.firstAccessResponse.questionList.string[idex]);
 			}
 			$(questions1).append("<br/>");
-			$(questions1).append("<div id=\"math\"> Please add these two numbers and key the answer in:&nbsp;&nbsp;  <span id=\"knum\">"+json.firstAccessResponse.secondQuestion+"</span></div>");
+			$(questions1).append("<div id=\"math\"><span id=\"q2\">Second Question:</span> Please add these two numbers and key the answer in:&nbsp;&nbsp;  <span id=\"knum\">"+json.firstAccessResponse.secondQuestion+"</span></div><br/>");
 			questionNumber = json.firstAccessResponse.questionNumber;
 			questionOperations.setQuestionNumber(json.firstAccessResponse.questionNumber);
 			questionOperations.setAddQuestion(json.firstAccessResponse.secondQuestion);
@@ -732,12 +732,12 @@ function print_recursive(printthis) {
 					action="http://www.zenredcomputinglocal.com:8080/answerQuestion1.html"
 					method="get">
 					<div id="uQuestion1">
-						Your First Question Answer: <span id="uQ1"  > <input type="text" 
+						Your <span id="qa1">First Question</span>Answer: <span id="uQ1"  > <input type="text" 
 							name="question1" maxlength=10 size=5 />
 						</span>
 					</div>
 					<div id="uQuestion2">
-						Your Second Question Answer: <span id="uQ2"> <input type="text" 
+						Your <span id="qa2">Second Question</span> Answer: <span id="uQ2"> <input type="text" 
 							name="question2" maxlength=10 size=5 />
 						</span>
 					</div>

@@ -188,8 +188,11 @@ header#topHeader{
 	width:65%;
 	background-color: #999999;
 }
-#knum{
+#knum, #q1, #qa1{
 	color: yellow;
+}
+#q2, #qa2{
+	color: lightgreen;
 }
 
 #question0, #firstName, #eMail, #password2{
