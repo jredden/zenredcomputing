@@ -16,6 +16,11 @@
 
 	<repositories>
 		<repository>
+			<id>CentralRepo</id>
+			<url>http://repo1.maven.org/maven2/</url>
+		</repository>
+	
+		<repository>
 			<id>JBossRepo</id>
 			<url>http://repository.jboss.com/maven2/</url>
 		</repository>
@@ -68,9 +73,9 @@
 			<version>1.4.2</version>
 		</dependency>
 		<dependency>
-			<groupId>org.codehaus</groupId>
+			<groupId>org.codehaus.jettison</groupId>
 			<artifactId>jettison</artifactId>
-			<version>1.0.1</version>
+			<version>1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
