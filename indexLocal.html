@@ -1,0 +1,795 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="keywords" content="<meta name="keywords" content="Techical BLog,Blog Software,Resume,Ciriculum Vitae,Zenred Computing,GIT residing Open Source" />
+
+ 
+<link href="css/main.css" rel="stylesheet" type="text/css">
+
+<script src="js/jquery-3.0.0.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery.form.js"></script>
+<script src="ckeditor/ckeditor.js" type="text/javascript"></script>
+<script src="ckeditor/adapters/jquery.js" type="text/javascript"></script>
+<script src="js/jPages.js"></script>"
+<script type="text/javascript" >
+
+
+var questionOperations = (function(){
+	// private
+	var questionNumber = '0';
+	var addQuestion = '0+0';
+	var formData = { questionNumber1:questionNumber, questionNumber2:addQuestion}
+	
+	// public 
+	return {
+		setQuestionNumber: function(question){
+			questionNumber = question;
+			formData.questionNumber1 = questionNumber;
+		},
+		setAddQuestion: function(question){
+			addQuestion = question;
+			formData.questionNumber2 = addQuestion;
+		},
+		getFormData: function(){
+			return formData;
+		}
+	}
+}());
+
+var ckeditorOperations = (function(){
+	// private
+	var backGroundColor = 'grey';
+	var instanceName = 'blogText'
+	var subject = undefined;
+	
+	// public
+	return{
+		setBackGroundColor: function(bgColor){
+			backGroundColor = bgColor;
+		},
+		setInstanceName: function(iName){
+			instanceName = iName;
+		},
+		setSubject: function(thisSubject){
+			subject = thisSubject;
+		},
+		buildEntry: function(){
+			CKEDITOR.instances[instanceName].setData('From: ' 
+					+ sessionStorage.EMAIL + "<p/>"
+					+'Subject: '
+					+ subject
+					+"<p/>Title:</p>"
+					+'Start Entry:');
+				CKEDITOR.instances[instanceName].document.getBody().setStyle('background-color', backGroundColor);
+				$('#page').hide();
+				var showList = ['blogForm', 'blogUrls'];
+				tagOperations.show(showList);
+				blogRequest.jsonCall(subject);
+	
+		}
+	}
+}());
+
+var tagOperations = (function(){
+	// private
+	var showOperations = [
+	       			function johntreddenSect(){
+	   					$('#johntreddenSect').show();
+	   				},
+	   			   	function resumeSect() {
+	   					$('#resumeSect').show();
+	   				},
+	   			   	function login_op(){
+	   					$('#login_op').show();
+	   				},
+	   			   	function openSourceSect(){
+	   					$('#openSourceSect').show();
+	   				},
+	   			   	function emailAndPassword(){
+	   					$('#emailAndPassword').show();
+	   				},
+	   			   	function questions1(){
+	   					$('#questions1').show();
+	   				},
+	   				function answerQuestionOne(){
+		   				$('#answerQuestionOne').show();
+		   			},
+	   				function createLogin(){
+	   					$('#createLogin').show();
+	   				},	
+	   				function blogSect(){
+	   					$('#blogSect').show();
+	   				},
+	   				function blogContent(){
+	   					$('#blogContent').show();
+	   				},
+		   			function blogForm(){
+		   				$('#blogForm').show();
+	   				},	   			
+		   			function blogUrls(){
+	   					$('#blogUrls').show();
+	   				},	   			
+		   			function blogUrls2(){
+	   					$('#blogUrls2').show();
+	   				},
+	   				function holderId(){
+		   				$('#holderId').show();
+	   				}	
+	];
+	var hideOperations = [
+			   function johntreddenSect(){
+					$('#johntreddenSect').hide();
+				},
+			    function resumeSect() {
+					$('#resumeSect').hide();
+				},
+			    function login_op(){
+					$('#login_op').hide();
+				},
+   			   	function openSourceSect(){
+   					$('#openSourceSect').hide();
+   				},
+    			function emailAndPassword(){
+   					$('#emailAndPassword').hide();
+   				},
+    			function questions1(){
+   					$('#questions1').hide();
+   				},
+   				function answerQuestionOne(){
+	   				$('#answerQuestionOne').hide();
+	   			},
+	   			function createLogin(){
+	   				$('#createLogin').hide();
+	   			},
+	   			function blogSect(){
+	   				$('#blogSect').hide();
+	   			},
+	   			function blogContent(){
+	   				$('#blogContent').hide();
+	   				$('#blogForm').hide();
+	   			},
+	   			function blogForm(){
+	   				$('#blogForm').hide();
+	   			},	   			
+	   			function blogUrls(){
+	   				$('#blogUrls').hide();
+	   			},	   			
+	   			function blogUrls2(){
+	   				$('#blogUrls2').hide();
+	   			},
+   				function holderId(){
+	   				$('#holderId').hide();
+   				}
+	];
+	var references = {
+			"johntreddenSect" : 0,
+			"resumeSect" : 1,
+			"login_op" : 2,
+			"openSourceSect" : 3,
+			"emailAndPassword" : 4,
+			"questions1" :5,
+			"answerQuestionOne" : 6,
+			"createLogin" :7,
+			"blogSect" :8,
+			"blogContent" :9,
+			"blogForm" :10,
+			"blogUrls" :11,
+			"blogUrls" :12,
+			"holderId" :13
+	};
+	
+	// public 
+	return {
+		show: function(showList){ 
+			for(var idex = 0; idex < showList.length; idex++){
+				console.log("show:" + showList[idex]);
+				var token2 = references[showList[idex]];
+				showOperations[token2]();
+			}
+		},
+		hide: function(hideList){
+			for (var idex = 0; idex < hideList.length; idex++){
+				console.log("hide:" + hideList[idex]);
+				var token2 = references[hideList[idex]];
+				hideOperations[token2]();
+			}
+		},
+		hideAll: function(){
+			for(token in hideOperations){ 
+				console.log("token:" + token);
+				var op = hideOperations[token];
+				op();
+			}
+		},
+		both: function(showList, hideList){
+			tagOperations.show(showList);
+			tagOperations.hide(hideList);
+		}
+		
+	}
+}());
+$(document).ready(function() {
+	console.log("in ready");
+	$( 'textarea#editor1' ).ckeditor();
+ 
+	tagOperations.hideAll();
+	$('#blogContent').hide();
+	// LoginFormId
+	$('#LoginFormID').ajaxForm({ 
+		dataType:  'json', 
+		success:   processJson,
+		error: function errorHandler(){
+			var out = '';
+  			for (var p in this) {
+    			out += p + ':::::' + this[p] + '\n';
+    			console.log("error:"+out);
+  				}
+		}
+	});
+	
+	// json processor for LoginFormID
+	function processJson(json) {
+		console.log("login:");
+		if(json.basicMesage.theMessage.indexOf("Passed") != -1){
+			var showList = ['blogSect'];
+			var hideList = ['emailAndPassword','resumeSect', 'answerQuestionOne', 'createLogin'];
+			var emailAddress = json.basicMesage.emailAddress;
+			sessionStorage.setItem('LOGIN', true);
+			sessionStorage.setItem('EMAIL', emailAddress);
+			seeCat0.jsonCall();
+			tagOperations.both(showList, hideList);
+			console.log("in Passed");
+		}
+		else{
+			alert("login failed  ... select home and try again");
+		}
+	}
+	
+	// CreateLoginFormId   - used to create a login
+	$('#CreateLoginFormID').ajaxForm({ 
+		dataType:  'json', 
+		type: "GET",
+		success:   processCreateLoginJson,		
+		error: function errorHandler(){
+			var out = '';
+  			for (var p in this) {
+    			out += p + ':::::' + this[p] + '\n';
+    			console.log("error:"+out);
+  				}
+		}
+	});
+	// json processor for CreateLoginFormId
+	function processCreateLoginJson(json) {
+		console.log("createLogin:"+json.createMessageResponse.emailAddress);
+		if(json.createMessageResponse.theMessage.indexOf("SUCCESS") != -1){
+			var showList = ['blogSect'];
+   		var hideList = ['resumeSect', 'johntreddenSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin'];
+			tagOperations.both(showList, hideList);
+			sessionStorage.setItem('LOGIN', true);
+			sessionStorage.setItem('EMAIL', emailAddress);
+		}
+		else{
+			alert("There is an error in what you typed:"+json.createMessageResponse.theMessage);
+		}
+	}
+	// Question1FormID is associated to a challange similar to captcha 
+	// 					except questions are asked
+	$('#Question1FormID').ajaxForm({ 
+		dataType:  'json', 
+		type: "GET",
+		success:   processQuestion1Json,		
+		data: questionOperations.getFormData(),
+		error: function errorHandler(){
+			var out = '';
+  			for (var p in this) {
+    			out += p + ':::::' + this[p] + '\n';
+    			console.log("error:"+out);
+  				}
+		}
+	});
+	
+	// json processor for Question1FormID
+	function processQuestion1Json(json) {
+		console.log("question1:");
+		if(json.basicMesage.theMessage.indexOf("SUCCESS") != -1){
+			var showList = ['createLogin']
+			var hideList = ['blogSect','resumeSect','johntreddenSect','login_op','emailAndPassword','blogSect','questions1', 'answerQuestionOne'];
+			tagOperations.both(showList, hideList);
+		}
+		else{
+			alert("wrong answer ... try again");
+		}
+	}
+	
+	// Zenred Computing Splash
+	$(center).hide();
+	$(center2).hide();
+	$(centerZR).hide();
+	
+	$(center).fadeIn();
+	$(center).fadeOut(5000);
+	$(center2).fadeIn();
+	$(center2).fadeOut(7000);
+	$(centerZR).fadeIn();
+	$(centerZR).fadeOut(9000);
+	// CLICK event handlers
+	// each has a list of show and hide operations that make elements appear and disappear
+	// on the page.
+	
+	$("#home").click(function () { 
+		tagOperations.hideAll();
+	});	
+	$("#resume").click(function () { 
+		console.log("in resume");
+		var showList = ['resumeSect'];
+		var hideList = ['johntreddenSect','openSourceSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin', 'blogSect', 'blogForm', 'blogUrls', 'holderId'];
+		tagOperations.both(showList, hideList);
+	});
+	
+	$("#login").click(function () { 
+		console.log("LOGIN:"+sessionStorage.LOGIN);
+		if(sessionStorage.LOGIN){
+			console.log("Already logged in");
+			var showList = ['blogSect'];
+   			var hideList = ['johntreddenSect', 'openSourceSect','resumeSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin', 'blogForm'];
+   			seeCat0.jsonCall();
+		}
+		else{
+			var showList = ['login_op'];
+			var hideList = ['johntreddenSect','resumeSect','openSourceSect','emailAndPassword','blogSect','questions1','answerQuestionOne', 'createLogin','blogForm'];
+		}
+		tagOperations.both(showList, hideList);
+	});	
+	$("#openSource").click(function () {
+		console.log("in openSource"); 
+		var showList = ['openSourceSect'];
+		var hideList = ['johntreddenSect','resumeSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin', 'blogSect','blogForm', 'blogUrls', 'holderId'];
+		tagOperations.both(showList, hideList);
+	});
+	
+	$("#startLogin").click(function(){
+		var showList = ['emailAndPassword']
+		var hideList = ['johntreddenSect','resumeSect','login_op', 'answerQuestionOne', 'createLogin','blogForm'];
+		tagOperations.both(showList, hideList);
+	});
+	
+	$("#startLoginRequest").click(function(){
+		var hideList = ['johntreddenSect', 'resumeSect','login_op', 'answerQuestionOne', 'createLogin', 'openSourceSect', 'blogForm'];
+		tagOperations.hide(hideList);
+		accessRequest.jsonCall();
+	});
+	
+	$("#Computer_History").click(function(){
+		console.log("Computer History");	
+		ckeditorOperations.setBackGroundColor('#C9C9C9');
+		ckeditorOperations.setSubject('Computer History');
+		ckeditorOperations.buildEntry();
+	});
+	$("#Computer_Languages").click(function(){
+		console.log("Computer Languages");
+		ckeditorOperations.setBackGroundColor('#D4D4D4');
+		ckeditorOperations.setSubject('Computer Languages');
+		ckeditorOperations.buildEntry();
+
+	});
+	$("#Inclusive_Software_Engineering").click(function(){
+		console.log("Inclusive Software Engineering");
+		ckeditorOperations.setBackGroundColor('#DBDBDB');
+		ckeditorOperations.setSubject('Inclusive Software Engineering');
+		ckeditorOperations.buildEntry();	
+	});
+	$("#Business_Stories").click(function(){
+		console.log("Business Stories");
+		ckeditorOperations.setBackGroundColor('#DE0E0E0');
+		ckeditorOperations.setSubject('Business Stories');
+		ckeditorOperations.buildEntry();	
+
+	});
+	
+	$("#blogSubmit").click(function(){
+		var theStuff =  CKEDITOR.instances['blogText'].getData();
+		console.log("BLOG SUBMIT:"+theStuff);
+		$.post('http://www.johntreddenlocal.com:8080/zenredcomputing-1.0/blogPost.html',  
+			{'emailAddress': sessionStorage.EMAIL, 'category': sessionStorage.CATEGORY, 'editor1': theStuff},
+			function(resultData){
+				console.log("RESULT DATA:"+resultData);
+				var showList = ['holderId'];
+				tagOperations.show(showList);
+						
+				var ick = resultData.replace('com.zenred.zenredcomputing.vizualization.VisualizationCentricPostsResponse', 'zenred');
+				var posts = JSON.parse(ick);
+				var object = posts.TopicResponse.visualizationCentricPosts.zenred;
+				
+				console.log("LENGTH:"+object.length);
+				var htmlStuff = "";
+				theIndex = [];
+				for (var idex = 0; idex < object.length; idex++) {
+					idex2 = idex;
+					theIndex[idex] = "" + object[idex]['Id'];
+					console.log("theIndex:"+theIndex[idex2]);
+					htmlStuff +="<p><a href=\"javascript:readBlog.readBlogById("+theIndex[idex2]+")\">"+object[idex]['Title']+ "</a></p><p>"+object[idex]['emailAddress']+"</p>";
+					console.log("HTML_STUFF:"+htmlStuff);
+					$(blogUrls2 ).html(htmlStuff);
+				}
+//				htmlStuff += "<input type=\"text\" value=\"1\" > ";
+//				htmlStuff += "<button id=\"pageButton \">jump to this page</button>";
+				$("div.holder").jPages({
+			        containerID : "blogUrls2"
+			    });
+			})
+			;
+			return false;
+	});
+	
+	$("#johntredden").click(function(){
+		window.location = "http://www.johntreddenlocal.com/johntredden";
+	});
+
+	/* when button is clicked */
+    $("pageButton").click(function(){
+        /* get given page */
+      var page = parseInt( $("input").val() );
+      /* jump to that page */
+      console.log("HOLDER:"+page);
+      $("div.holder").jPages( page );
+    });
+});
+// invoke accessRequest endpoint associated to startLogin event
+var accessRequest = (function () {
+	return{
+		jsonCall: function(){
+			console.log("start AccessRequest");
+			$.getJSON("http://www.johntreddenlocal.com:8080/zenredcomputing-1.0/firstAccess.html",
+					function(json){           // callback
+					console.log("Here");
+					processRequest.jsonProcess(json);
+					}		
+			);
+		}
+	}
+})();
+// json processor for accessRequest
+// 		it builds dynamic HTML using data returned from the server and asks questions
+var processRequest = (function () {
+	return{
+		jsonProcess: function(json){
+			var colorSelector = 0;
+			$(questions1).html("<div id=\"questionHeader\"> Please prove you are a person by answering two questions.</div><br/><div><span id=\"q1\">First Question:</span>  Key in a four letter word that describes  </div> ");
+			$(questions1).append("<div id=\"questionHeader2\">the following set of phrases.  </div>   ");
+			$(questions1).append("<br/>Answer yes to question one</div> ");
+			$(questions1).append("<br/>");
+			$(questions1).append("<div id=\"math\"><span id=\"q2\">Second Question:</span> Please add these two numbers and key the answer in:&nbsp;&nbsp;  <span id=\"knum\">"+json.firstAccessResponse.secondQuestion+"</span></div><br/>");
+			questionNumber = json.firstAccessResponse.questionNumber;
+			questionOperations.setQuestionNumber(json.firstAccessResponse.questionNumber);
+			questionOperations.setAddQuestion(json.firstAccessResponse.secondQuestion);
+
+			var showList = ['questions1','answerQuestionOne'];
+			tagOperations.show(showList);
+		}
+	}
+})();
+// sets up server endpoint invocation for blog categories
+var seeCat0 = (function () {
+	return{
+		jsonCall: function(){
+			console.log("start top level category");
+			$.getJSON("http://www.johntreddenlocal.com:8080/zenredcomputing-1.0/category.html",
+					function(json){           // callback
+					console.log("in cat 0");
+					jsonCategory.Category0(json);
+					}		
+			);
+		}
+	}
+})();
+// json processor for seeCat0
+// activates blog catagory controls
+var jsonCategory = (function () {
+	return{
+		Category0: function(json){
+			for (var idex = 0; idex < json.subjectsResponse.subjects.string.length; idex++) {
+				var category = json.subjectsResponse.subjects.string[idex];
+				var category2 = category.replace(' ','_');
+				category2 = category2.replace(' ','_');
+				var line = "<button id=\""+category2+"\">"+json.subjectsResponse.subjects.string[idex]+ "</button>";
+				console.log("line:"+line);
+			}
+			$("#blogSect").show();
+		},
+		Category1: function(json){
+			console.log('CATEGORY1:'+json);
+		}
+	}
+})();
+// called by category event handlers
+// 	invokes end point processor for selected category
+var blogRequest = (function () {
+	return{
+		jsonCall: function(category){
+			console.log("blog request:"+category);
+			sessionStorage.setItem('CATEGORY', category);
+			var email = sessionStorage.EMAIL;
+			console.log("click EMAIL:"+email);
+			$.getJSON("http://www.johntreddenlocal.com/zenredcomputing-1.0/generalTopic.html?subject="
+			+category
+			+"&emailAddress="
+			+email,
+			function(json){
+				$.post('http://www.johntreddenlocal.com/zenredcomputing-1.0/readPosts.html',
+						{'emailAddress': sessionStorage.EMAIL, 'category': sessionStorage.CATEGORY},
+						function(resultData){
+							console.log("RESULT DATA2:"+resultData);
+							var showList = ['holderId'];
+							tagOperations.show(showList);
+									
+							var ick = resultData.replace('com.zenred.zenredcomputing.vizualization.VisualizationCentricPostsResponse', 'zenred');
+							var posts = JSON.parse(ick);
+							var object = posts.TopicResponse.visualizationCentricPosts.zenred;
+							
+							console.log("LENGTH2:"+object.length);
+							var htmlStuff = "";
+							theIndex = [];
+							for (var idex = 0; idex < object.length; idex++) {
+								idex2 = idex;
+								theIndex[idex] = "" + object[idex]['Id'];
+								console.log("theIndex:"+theIndex[idex2]);
+								htmlStuff +="<p><a href=\"javascript:readBlog.readBlogById("+theIndex[idex2]+")\">"+object[idex]['Title']+ "</a></p><p>"+object[idex]['emailAddress']+"&nbsp;"+object[idex]['Stamp']+"</p>";
+								console.log("HTML_STUFF2:"+htmlStuff);
+								$(blogUrls2 ).html(htmlStuff);
+							}
+//							htmlStuff += "<input type=\"text\" value=\"1\" > ";
+//							htmlStuff += "<button id=\"pageButton \">jump to this page</button>";
+							$("div.holder").jPages({
+						        containerID : "blogUrls2"
+						    });
+						})
+						;						
+				jsonCategory.Category1(json);
+				}		
+			);
+		}
+	}
+})();
+
+// ivoked to read an existing blog entry
+var readBlog = (function (){
+	return{
+		readBlogById: function(Id){
+			// alert(Id);
+			$.post("http://www.johntreddenlocal.com:8080/zenredcomputing-1.0/readPostById.html",
+					{PostId: Id, category: sessionStorage.CATEGORY }, function (post, status){
+						var posts = $.parseJSON(post);
+						console.log("POSTS:"+posts['PostResponse']['visualizationCentricPostsResponse']['Content']);
+						var status = posts['PostResponse']['status'];
+						if(status.indexOf("success") != -1){
+							var color = ckeditorAttributes.color(posts['PostResponse']['visualizationCentricPostsResponse']['Subject']);
+							CKEDITOR.instances['blogText'].setData(posts['PostResponse']['visualizationCentricPostsResponse']['Content']);
+							CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', color);
+						}
+						else{
+							alert("Internal error occured while reading post.");
+						}
+					}
+			);
+		}
+	}
+})();
+
+// CKEDITOR display attributes.
+var ckeditorAttributes = (function (){
+
+	// private
+	
+	// Computer History   #C9C9C9
+	// Computer Languages #D4D4D4
+	// Inclusive Software Engineering  #DBDBDB
+	// Business_Stories   #E0E0E0
+	var colors = {
+			"Computer History" : "#C9C9C9",
+			"Computer Languages" : "#D4D4D4",
+			"Inclusive Software Engineering" : "#DBDBDB",
+			"Business_Stories" :  "#E0E0E0"
+	};
+
+	// public
+				
+	return{
+		color: function(subject){
+			var colorCode = colors[subject];
+			if(colorCode == null){
+				colorCode = "#E1E1E1";
+			}
+			console.log("COLOR:"+subject+"::"+colorCode);
+			return colorCode;	
+		}	
+	}
+})();
+
+// for debugging
+function print_recursive(printthis) {
+    var output = '';
+
+    if($.isArray(printthis) || typeof(printthis) == 'object') {
+        for(var i in printthis) {
+        	console.log("??:"+printthis[i]+"::"+i);
+            output += i + ' : ' + print_r(printthis[i]) + '\n';
+        }
+    }else {
+        output += printthis;
+    }
+    console.log("PRINT:"+output);
+}
+</script>
+
+<title>Zenred Computings Web Site</title>
+</head>
+<body>
+<div id="wrapper">
+<header id="topHeader">
+<hgroup>
+<nav id="topNav">
+  <button id="home">Home</button>
+  <button id="resume">Curriculum Vitae</button>
+  <button id="login"> Login for access to Blog</button>
+  <button id="openSource">URLs to zenred computing open source on github</button>
+  <button id="johntredden">John Reddens website</button>
+</nav>
+
+
+</hgroup>
+</header>
+
+<section id="space">
+</section>
+
+<section id="johntreddenSect">
+</section>
+
+<section id="resumeSect">
+		<a href="docs/cvh.pdf">Curriculum Vitae</a>
+</section>
+
+<section id="openSourceSect">
+		<a href="https://github.com/jredden">Open Source On GitHub</a>
+</section>
+
+<section id="blogSect">
+<div id="blogMenu"><b>Choose a General Blog Topic </b></div>
+<nav>
+<button id="Computer_History">Computer History</button>
+<button id="Computer_Languages">Computer Languages</button> 
+<button id="Inclusive_Software_Engineering">Inclusive Software Engineering</button> 
+<button id="Business_Stories">Business Stories</button> 
+</nav>
+</section>
+
+<section id="addBlog">
+<!-- navigation holder -->
+<div class="holder" id="holderId"></div>
+<div id="#blogContent">
+<form id="blogForm" class="blog">
+<textarea class="ckeditor" name="editor1" id="blogText">
+                
+</textarea>
+
+<input type="submit" value="Submit" id="blogSubmit" />
+</form>
+<div id="blogUrls" class="containingbox"></div>
+</div>
+<div id="blogUrls2">
+
+
+</div>
+</section>
+
+<section id="login_op">
+			<nav>
+				<div id="chooseLogin">
+					<button id="startLogin">Existing Login</button>
+				</div>
+				<div id="requestLogin">
+					<button id="startLoginRequest">Request Access to Blog</button>
+				</div>
+			</nav>
+</section>
+<section id="challangeSect">
+			<div id="questions1"></div>
+			
+			<div id="emailAndPassword">
+				<form name="LoginForm" id="LoginFormID"
+					action="http://www.johntreddenlocal.com:8080/zenredcomputing-1.0/login.html"
+					method="get">
+					<div id="uEmail">
+						E-Mail Address: <span id="uMails"> <input type="text"
+							name="email" maxlength=255 size=64 />
+						</span>
+					</div>
+					<div id="loginPassword">
+						Password&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+						<span id="loginPasswords"> <input type="password"
+							name="password" maxlength=255 size=64 />
+						</span>
+					</div>
+					<div id="submit">
+						<input class="button" type="submit" id="loginOperation"
+							name="submit" value="Submit E-Mail Address and Password" />
+					</div>
+				</form>
+			</div>
+			
+			<div id="answerQuestionOne">
+				<form name="Question1Form" id="Question1FormID"
+					action="http://www.johntreddenlocal.com:8080/zenredcomputing-1.0/answerQuestion1.html"
+					method="get">
+					<div id="uQuestion1">
+						Your <span id="qa1">First Question</span>Answer: <span id="uQ1"  > <input type="text" 
+							name="question1" maxlength=10 size=5 />
+						</span>
+					</div>
+					<div id="uQuestion2">
+						Your <span id="qa2">Second Question</span> Answer: <span id="uQ2"> <input type="text" 
+							name="question2" maxlength=10 size=5 />
+						</span>
+					</div>
+					<div id="submit">
+						<input class="button" type="submit" id="questionOneOperation"
+							name="submit" value="Submit Answers" />
+					</div>
+				</form>
+			</div>
+</section>
+			
+<section id="createLoginSec">		
+			<div id="createLogin">
+				<form name="CreateLoginForm"  id="CreateLoginFormID"
+					action="http://www.johntreddenlocal.com:8080/zenredcomputing-1.0/createLogin.html"
+					method="get">
+					<div id="firstName">
+						Your First Name: <span id="fn1"> <input type="text" 
+							name="firstName" maxlength=255 size=25 />
+						</span>
+					</div>
+					<div id="lastName">
+						Your Last Name: <span id="ln1"> <input type="text" 
+							name="lastName" maxlength=255 size=25 />
+						</span>
+					</div>
+					<div id="eMail">
+						Your E-Mail Address: <span id="em1"> <input type="text"
+							name="email" maxlength=255 size=25 />
+						</span>
+					</div>
+					<div id="password1">
+						Type Your Password: <span id="pw1"> <input type="password" 
+							name="Password1" maxlength=255 size=25 />
+						</span>
+					</div>
+					<div id="password2">
+						Retype Your Password: <span id="pw2"> <input type="password" 
+							name="Password2" maxlength=255 size=25 />
+						</span>
+					</div>
+					<div class="submitC" id="submit">
+						<input class="button" type="submit" id="createLoginOperation"
+							name="submit" value="Submit Answers" />
+					</div>				
+					</form>
+			</div>
+</section>
+<section id="page">
+	<div id="center">
+		REDDEN
+	</div>	
+	<div id="center2">
+		ZENK
+	</div>	
+	<div id="centerZR">
+		ZENRED COMPUTING
+	</div>
+</section>
+</div>
+
+
+</body>
+</html>
