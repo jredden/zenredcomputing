@@ -319,6 +319,8 @@ $(document).ready(function() {
 	
 	$("#home").click(function () { 
 		tagOperations.hideAll();
+		window.location = "http://zenredcomputinglocal.com";
+
 	});	
 	$("#resume").click(function () { 
 		console.log("in resume");
@@ -390,7 +392,7 @@ $(document).ready(function() {
 	$("#blogSubmit").click(function(){
 		var theStuff =  CKEDITOR.instances['blogText'].getData();
 		console.log("BLOG SUBMIT:"+theStuff);
-		$.post('http://www.johntreddenlocal.com:8080/zenredcomputing-1.0/blogPost.html',  
+		$.post('http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/blogPost.html',  
 			{'emailAddress': sessionStorage.EMAIL, 'category': sessionStorage.CATEGORY, 'editor1': theStuff},
 			function(resultData){
 				console.log("RESULT DATA:"+resultData);
@@ -423,7 +425,7 @@ $(document).ready(function() {
 	});
 	
 	$("#johntredden").click(function(){
-		window.location = "http://www.johntreddenlocal.com/johntredden";
+		window.location = "http://www.johntreddenlocal.com";
 	});
 
 	/* when button is clicked */
@@ -440,7 +442,7 @@ var accessRequest = (function () {
 	return{
 		jsonCall: function(){
 			console.log("start AccessRequest");
-			$.getJSON("http://www.johntreddenlocal.com:8080/zenredcomputing-1.0/firstAccess.html",
+			$.getJSON("http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/firstAccess.html",
 					function(json){           // callback
 					console.log("Here");
 					processRequest.jsonProcess(json);
@@ -455,9 +457,8 @@ var processRequest = (function () {
 	return{
 		jsonProcess: function(json){
 			var colorSelector = 0;
-			$(questions1).html("<div id=\"questionHeader\"> Please prove you are a person by answering two questions.</div><br/><div><span id=\"q1\">First Question:</span>  Key in a four letter word that describes  </div> ");
-			$(questions1).append("<div id=\"questionHeader2\">the following set of phrases.  </div>   ");
-			$(questions1).append("<br/>Answer yes to question one</div> ");
+			$(questions1).html("<div id=\"questionHeader\"> Please prove you are a person by answering two questions.</div><br/><div><span id=\"q1\">First Question:</span>  Key in the four letter word love  </div> ");
+			$(questions1).append("<div id=\"questionHeader2\">as the following phrase.  </div>   ");
 			$(questions1).append("<br/>");
 			$(questions1).append("<div id=\"math\"><span id=\"q2\">Second Question:</span> Please add these two numbers and key the answer in:&nbsp;&nbsp;  <span id=\"knum\">"+json.firstAccessResponse.secondQuestion+"</span></div><br/>");
 			questionNumber = json.firstAccessResponse.questionNumber;
@@ -474,7 +475,7 @@ var seeCat0 = (function () {
 	return{
 		jsonCall: function(){
 			console.log("start top level category");
-			$.getJSON("http://www.johntreddenlocal.com:8080/zenredcomputing-1.0/category.html",
+			$.getJSON("http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/category.html",
 					function(json){           // callback
 					console.log("in cat 0");
 					jsonCategory.Category0(json);
@@ -488,11 +489,10 @@ var seeCat0 = (function () {
 var jsonCategory = (function () {
 	return{
 		Category0: function(json){
-			for (var idex = 0; idex < json.subjectsResponse.subjects.string.length; idex++) {
-				var category = json.subjectsResponse.subjects.string[idex];
-				var category2 = category.replace(' ','_');
-				category2 = category2.replace(' ','_');
-				var line = "<button id=\""+category2+"\">"+json.subjectsResponse.subjects.string[idex]+ "</button>";
+			for (var idex = 0; idex < json.subjectsResponse.subjects.length; idex++) {
+				var category = json.subjectsResponse.subjects[idex].string;
+				var category2 = category.toString().replace(' ','_');
+				var line = "<button id=\""+category2+"\">"+json.subjectsResponse.subjects[idex].string+ "</button>";
 				console.log("line:"+line);
 			}
 			$("#blogSect").show();
@@ -511,12 +511,12 @@ var blogRequest = (function () {
 			sessionStorage.setItem('CATEGORY', category);
 			var email = sessionStorage.EMAIL;
 			console.log("click EMAIL:"+email);
-			$.getJSON("http://www.johntreddenlocal.com/zenredcomputing-1.0/generalTopic.html?subject="
+			$.getJSON("http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/generalTopic.html?subject="
 			+category
 			+"&emailAddress="
 			+email,
 			function(json){
-				$.post('http://www.johntreddenlocal.com/zenredcomputing-1.0/readPosts.html',
+				$.post('http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/readPosts.html',
 						{'emailAddress': sessionStorage.EMAIL, 'category': sessionStorage.CATEGORY},
 						function(resultData){
 							console.log("RESULT DATA2:"+resultData);
@@ -557,7 +557,7 @@ var readBlog = (function (){
 	return{
 		readBlogById: function(Id){
 			// alert(Id);
-			$.post("http://www.johntreddenlocal.com:8080/zenredcomputing-1.0/readPostById.html",
+			$.post("http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/readPostById.html",
 					{PostId: Id, category: sessionStorage.CATEGORY }, function (post, status){
 						var posts = $.parseJSON(post);
 						console.log("POSTS:"+posts['PostResponse']['visualizationCentricPostsResponse']['Content']);
@@ -644,6 +644,7 @@ function print_recursive(printthis) {
 </section>
 
 <section id="johntreddenSect">
+		window.location = "http://johntreddenlocal.com";
 </section>
 
 <section id="resumeSect">
@@ -698,7 +699,7 @@ function print_recursive(printthis) {
 			
 			<div id="emailAndPassword">
 				<form name="LoginForm" id="LoginFormID"
-					action="http://www.johntreddenlocal.com:8080/zenredcomputing-1.0/login.html"
+					action="http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/login.html"
 					method="get">
 					<div id="uEmail">
 						E-Mail Address: <span id="uMails"> <input type="text"
@@ -720,7 +721,7 @@ function print_recursive(printthis) {
 			
 			<div id="answerQuestionOne">
 				<form name="Question1Form" id="Question1FormID"
-					action="http://www.johntreddenlocal.com:8080/zenredcomputing-1.0/answerQuestion1.html"
+					action="http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/answerQuestion1.html"
 					method="get">
 					<div id="uQuestion1">
 						Your <span id="qa1">First Question</span>Answer: <span id="uQ1"  > <input type="text" 
@@ -743,7 +744,7 @@ function print_recursive(printthis) {
 <section id="createLoginSec">		
 			<div id="createLogin">
 				<form name="CreateLoginForm"  id="CreateLoginFormID"
-					action="http://www.johntreddenlocal.com:8080/zenredcomputing-1.0/createLogin.html"
+					action="http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/createLogin.html"
 					method="get">
 					<div id="firstName">
 						Your First Name: <span id="fn1"> <input type="text" 
