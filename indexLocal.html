@@ -61,7 +61,8 @@ var ckeditorOperations = (function(){
 					+ subject
 					+"<p/>Title:</p>"
 					+'Start Entry:');
-				CKEDITOR.instances[instanceName].document.getBody().setStyle('background-color', backGroundColor);
+//				CKEDITOR.instances[instanceName].document.getBody().setStyle('background-color', backGroundColor);
+				CKEDITOR.instances[instanceName].document.getBody();
 				$('#page').hide();
 				var showList = ['blogForm', 'blogUrls'];
 				tagOperations.show(showList);
