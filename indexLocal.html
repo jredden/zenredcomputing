@@ -331,8 +331,8 @@ $(document).ready(function() {
 	});
 	
 	$("#login").click(function () { 
-		console.log("LOGIN:"+sessionStorage.LOGIN);
-		if(sessionStorage.LOGIN){
+		console.log("LOGIN:"+sessionStorage.LOGIN + " EMAIL:" + sessionStorage.EMAIL);
+		if(sessionStorage.LOGIN  && sessionStorage.EMAIL != undefined){
 			console.log("Already logged in");
 			var showList = ['blogSect'];
    			var hideList = ['johntreddenSect', 'openSourceSect','resumeSect','login_op','emailAndPassword','questions1','answerQuestionOne', 'createLogin', 'blogForm'];
@@ -526,16 +526,18 @@ var blogRequest = (function () {
 									
 							var ick = resultData.replace('com.zenred.zenredcomputing.vizualization.VisualizationCentricPostsResponse', 'zenred');
 							var posts = JSON.parse(ick);
-							var object = posts.TopicResponse.visualizationCentricPosts.zenred;
+							var object = posts.TopicResponse.visualizationCentricPosts;
 							
 							console.log("LENGTH2:"+object.length);
 							var htmlStuff = "";
 							theIndex = [];
 							for (var idex = 0; idex < object.length; idex++) {
 								idex2 = idex;
-								theIndex[idex] = "" + object[idex]['Id'];
+								var object2 = object[idex];
+								console.log("OBJCET 2.id:" + object2.zenred.Id);
+								theIndex[idex] = "" + object2.zenred.Id;
 								console.log("theIndex:"+theIndex[idex2]);
-								htmlStuff +="<p><a href=\"javascript:readBlog.readBlogById("+theIndex[idex2]+")\">"+object[idex]['Title']+ "</a></p><p>"+object[idex]['emailAddress']+"&nbsp;"+object[idex]['Stamp']+"</p>";
+								htmlStuff +="<p><a href=\"javascript:readBlog.readBlogById("+object2.zenred.Id+")\">"+ object2.zenred.Title + "</a></p><p>"+object2.zenred.emailAddress +"&nbsp;"+object2.zenred.Stamp +"</p>";
 								console.log("HTML_STUFF2:"+htmlStuff);
 								$(blogUrls2 ).html(htmlStuff);
 							}
