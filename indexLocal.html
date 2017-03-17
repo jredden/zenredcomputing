@@ -404,16 +404,16 @@ $(document).ready(function() {
 				var posts = JSON.parse(ick);
 				var object = posts.TopicResponse.visualizationCentricPosts;
 				
-				console.log("LENGTH:"+object.length);
+				console.log("LENGTH1:"+object[0].zenred.length);
 				var htmlStuff = "";
 				theIndex = [];
-				for (var idex = 0; idex < object.length; idex++) {
+				for (var idex = 0; idex < object[0].zenred.length; idex++) {
 					idex2 = idex;
-					var object2 = object[idex];
-					theIndex[idex] = "" + object2.zenred.Id;
+					var object2 = object[0].zenred[idex];
+					console.log("OBJECT 1.id:" + object2.Id);
+					theIndex[idex] = "" + object2.Id;
 					console.log("theIndex:"+theIndex[idex2]);
-					console.log("theIndex 2:"+object2.zenred.Id);
-					htmlStuff +="<p><a href=\"javascript:readBlog.readBlogById("+object2.zenred.Id+")\">"+ object2.zenred.Title + "</a></p><p>"+object2.zenred.emailAddress+"</p>";
+					htmlStuff +="<p><a href=\"javascript:readBlog.readBlogById("+object2.Id+")\">"+ object2.Title + "</a></p><p>"+object2.emailAddress+"</p>";
 					console.log("HTML_STUFF:"+htmlStuff);
 					$(blogUrls2 ).html(htmlStuff);
 				}
@@ -530,16 +530,16 @@ var blogRequest = (function () {
 							var posts = JSON.parse(ick);
 							var object = posts.TopicResponse.visualizationCentricPosts;
 							
-							console.log("LENGTH2:"+object.length);
+							console.log("LENGTH2:"+object[0].zenred.length);
 							var htmlStuff = "";
 							theIndex = [];
-							for (var idex = 0; idex < object.length; idex++) {
+							for (var idex = 0; idex < object[0].zenred.length; idex++) {
 								idex2 = idex;
-								var object2 = object[idex];
-								console.log("OBJCET 2.id:" + object2.zenred.Id);
-								theIndex[idex] = "" + object2.zenred.Id;
+								var object2 = object[0].zenred[idex];
+								console.log("OBJECT 2.id:" + object2.Id);
+								theIndex[idex] = "" + object2.Id;
 								console.log("theIndex:"+theIndex[idex2]);
-								htmlStuff +="<p><a href=\"javascript:readBlog.readBlogById("+object2.zenred.Id+")\">"+ object2.zenred.Title + "</a></p><p>"+object2.zenred.emailAddress +"&nbsp;"+object2.zenred.Stamp +"</p>";
+								htmlStuff +="<p><a href=\"javascript:readBlog.readBlogById("+object2.Id+")\">"+ object2.Title + "</a></p><p>"+object2.emailAddress +"&nbsp;"+object2.Stamp +"</p>";
 								console.log("HTML_STUFF2:"+htmlStuff);
 								$(blogUrls2 ).html(htmlStuff);
 							}
@@ -570,7 +570,7 @@ var readBlog = (function (){
 						if(status.indexOf("success") != -1){
 							var color = ckeditorAttributes.color(posts['PostResponse']['visualizationCentricPostsResponse']['Subject']);
 							CKEDITOR.instances['blogText'].setData(posts['PostResponse']['visualizationCentricPostsResponse']['Content']);
-							CKEDITOR.instances['blogText'].document.getBody().setStyle('background-color', color);
+							CKEDITOR.instances['blogText'].document.getBody();
 						}
 						else{
 							alert("Internal error occured while reading post.");
