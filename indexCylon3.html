@@ -393,7 +393,7 @@ $(document).ready(function() {
 	$("#blogSubmit").click(function(){
 		var theStuff =  CKEDITOR.instances['blogText'].getData();
 		console.log("BLOG SUBMIT:"+theStuff);
-		$.post('http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/blogPost.html',  
+		$.post('http://www.zenredcomputingcylon3.com:8080/zenredcomputing-1.0/blogPost.html',  
 			{'emailAddress': sessionStorage.EMAIL, 'category': sessionStorage.CATEGORY, 'editor1': theStuff},
 			function(resultData){
 				console.log("RESULT DATA:"+resultData);
@@ -445,7 +445,7 @@ var accessRequest = (function () {
 	return{
 		jsonCall: function(){
 			console.log("start AccessRequest");
-			$.getJSON("http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/firstAccess.html",
+			$.getJSON("http://www.zenredcomputingcylon3.com:8080/zenredcomputing-1.0/firstAccess.html",
 					function(json){           // callback
 					console.log("Here");
 					processRequest.jsonProcess(json);
@@ -478,7 +478,7 @@ var seeCat0 = (function () {
 	return{
 		jsonCall: function(){
 			console.log("start top level category");
-			$.getJSON("http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/category.html",
+			$.getJSON("http://www.zenredcomputingcylon3.com:8080/zenredcomputing-1.0/category.html",
 					function(json){           // callback
 					console.log("in cat 0");
 					jsonCategory.Category0(json);
@@ -514,12 +514,12 @@ var blogRequest = (function () {
 			sessionStorage.setItem('CATEGORY', category);
 			var email = sessionStorage.EMAIL;
 			console.log("click EMAIL:"+email);
-			$.getJSON("http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/generalTopic.html?subject="
+			$.getJSON("http://www.zenredcomputingcylon3.com:8080/zenredcomputing-1.0/generalTopic.html?subject="
 			+category
 			+"&emailAddress="
 			+email,
 			function(json){
-				$.post('http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/readPosts.html',
+				$.post('http://www.zenredcomputingcylon3.com:8080/zenredcomputing-1.0/readPosts.html',
 						{'emailAddress': sessionStorage.EMAIL, 'category': sessionStorage.CATEGORY},
 						function(resultData){
 							console.log("RESULT DATA2:"+resultData);
@@ -562,7 +562,7 @@ var readBlog = (function (){
 	return{
 		readBlogById: function(Id){
 			// alert(Id);
-			$.post("http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/readPostById.html",
+			$.post("http://www.zenredcomputingcylon3.com:8080/zenredcomputing-1.0/readPostById.html",
 					{PostId: Id, category: sessionStorage.CATEGORY }, function (post, status){
 						var posts = $.parseJSON(post);
 						console.log("POSTS:"+posts['PostResponse']['visualizationCentricPostsResponse']['Content']);
@@ -704,7 +704,7 @@ function print_recursive(printthis) {
 			
 			<div id="emailAndPassword">
 				<form name="LoginForm" id="LoginFormID"
-					action="http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/login.html"
+					action="http://www.zenredcomputingcylon3.com:8080/zenredcomputing-1.0/login.html"
 					method="get">
 					<div id="uEmail">
 						E-Mail Address: <span id="uMails"> <input type="text"
@@ -726,7 +726,7 @@ function print_recursive(printthis) {
 			
 			<div id="answerQuestionOne">
 				<form name="Question1Form" id="Question1FormID"
-					action="http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/answerQuestion1.html"
+					action="http://www.zenredcomputingcylon3.com:8080/zenredcomputing-1.0/answerQuestion1.html"
 					method="get">
 					<div id="uQuestion1">
 						Your <span id="qa1">First Question</span>Answer: <span id="uQ1"  > <input type="text" 
@@ -749,7 +749,7 @@ function print_recursive(printthis) {
 <section id="createLoginSec">		
 			<div id="createLogin">
 				<form name="CreateLoginForm"  id="CreateLoginFormID"
-					action="http://www.zenredcomputinglocal.com:8080/zenredcomputing-1.0/createLogin.html"
+					action="http://www.zenredcomputingcylon3.com:8080/zenredcomputing-1.0/createLogin.html"
 					method="get">
 					<div id="firstName">
 						Your First Name: <span id="fn1"> <input type="text" 
